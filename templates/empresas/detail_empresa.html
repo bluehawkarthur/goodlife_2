@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<h3>Detalle de Empresa: {{object.razon_social}}</h3>
+		<dl class="dl-horizontal">
+		<dt>Razon Social:</dt>
+		<dd>{{object.razon_social}}</dd>
+		</dl>
+		
+		<dl class="dl-horizontal">
+		<dt>Direccion:</dt>
+		<dd>{{object.direccion}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Telefono 1:</dt>
+		<dd>{{object.telefono1}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Telefono 2:</dt>
+		<dd>{{object.telefono2}}</dd>
+		</dl>
+
+	</div>
+</div>
+{% endblock content %}

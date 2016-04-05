@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<h3>Detalle de tramite AFP: {{object.tipo_afp}}</h3>
+		<dl class="dl-horizontal">
+		<dt>Tipo de tramite:</dt>
+		<dd>{{object.tipo_afp}}</dd>
+		</dl>
+		
+		<dl class="dl-horizontal">
+		<dt>Observaciones:</dt>
+		<dd>{{object.observaciones}}</dd>
+		</dl>
+
+	</div>
+</div>
+{% endblock content %}

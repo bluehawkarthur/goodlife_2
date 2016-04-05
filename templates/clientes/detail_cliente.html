@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+<div class="container">
+	<div class="row">
+		<h3>Detalle de cliente: {{object.codigo_gl}}</h3>
+
+		<dl class="dl-horizontal">
+		<dt>Codigo De cliente:</dt>
+		<dd>{{object.codigo_gl}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Fecha de ingreso:</dt>
+		<dd>{{object.fecha_ingreso}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Ciudad de origen:</dt>
+		<dd>{{object.nombres}}</dd>
+		</dl>
+		
+		<dl class="dl-horizontal">
+		<dt>Nombres:</dt>
+		<dd>{{object.codigo_gl}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Apellidos:</dt>
+		<dd>{{object.apellidos}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>CI:</dt>
+		<dd>{{object.ci}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Telefono:</dt>
+		<dd>{{object.telefono}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Cel:</dt>
+		<dd>{{object.cel}}</dd>
+		</dl>
+		
+		<dl class="dl-horizontal">
+		<dt>Empresa:</dt>
+		<dd>{{object.empresa}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Tramite:</dt>
+		<dd>{{object.tramite}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>AFP:</dt>
+		<dd>{{object.afps}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Clinica:</dt>
+		<dd>{{object.clinica}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Persona de referencia:</dt>
+		<dd>{{object.persona_referencia}}</dd>
+		</dl>
+		
+		<dl class="dl-horizontal">
+		<dt>Telefono de referencia:</dt>
+		<dd>{{object.telefono_per_referencia}}</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+		<dt>Cel de referencia:</dt>
+		<dd>{{object.cel_per_referencia}}</dd>
+		</dl>
+	</div>
+</div>
+
+{% endblock content %}

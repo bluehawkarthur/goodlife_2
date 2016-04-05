@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<h3>Registrar AFP:</h3>
+			<form action="" method='POST'>{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" value='Registrar'>
+			</form>
+
+		</div>
+	</div>
+{% endblock content %}
+	

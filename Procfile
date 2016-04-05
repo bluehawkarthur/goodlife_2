@@ -1,0 +1,1 @@
+web: gunicorn goodlife_2.wsgi
