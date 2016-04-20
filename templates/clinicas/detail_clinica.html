@@ -3,28 +3,38 @@
 
 {% block content %}
 <div class="container">
-	<div class="row">
-		<h3>Detalle de Clinica/Hospital: {{object.razon_social}}</h3>
-		<dl class="dl-horizontal">
-		<dt>Razon Social:</dt>
-		<dd>{{object.razon_social}}</dd>
-		</dl>
-		
-		<dl class="dl-horizontal">
-		<dt>Direccion:</dt>
-		<dd>{{object.direccion}}</dd>
-		</dl>
+  <div class="row">
+    <form class="form-horizontal">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        <h1 class="">Detalle de Clinica/Hospital</h1>
+          <div class="form-group">
+            <label for="" class="col-sm-5 control-label2">Razon social:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.razon_social}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Direccion:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.direccion}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Telefono 1:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.telefono1}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Telefono 2:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.telefono2}}</p>
+            </div>
+          </div><!-- End form-group  -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+          <a href="/listar_clinica/" class="btn btn-lg btn-block btn-warning">Volver</a>
+        </div>
+      </div>
 
-		<dl class="dl-horizontal">
-		<dt>Telefono 1:</dt>
-		<dd>{{object.telefono1}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Telefono 2:</dt>
-		<dd>{{object.telefono2}}</dd>
-		</dl>
-
-	</div>
+      </form>
+  </div>
 </div>
 {% endblock content %}

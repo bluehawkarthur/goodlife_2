@@ -40,6 +40,7 @@
     <script src="{% static "js/wow.min.js"%}"></script>
     <script src="{% static "js/bootstrap.js"%}"></script>
     <script src="{% static "js/bootstrap.min.js"%}"></script>
+    <script src="{% static "js/modal.js"%}"></script>
 
 
 </head>
@@ -60,7 +61,7 @@
                 <a class="navbar-brand" href="#"></a>
                 <a class="navbar-brand" href="#"></a>
                 <a class="navbar-brand" href="#"></a>
-                <a class="navbar-brand pull-right" href="logout/">Salir</a>
+                <a class="navbar-brand pull-right" href="/logout/">Salir</a>
             </div>
             
           </div><!-- /.container-fluid -->
@@ -70,7 +71,9 @@
 
             
     {% block content %}
-
+        <body>
+            
+        </body>
     {% endblock content %}
             
 
@@ -79,17 +82,16 @@
     <!-- //////////////////////////////////////////////////////////////////////////// -->
     {% if user.is_authenticated %}
     <!-- START FOOTER -->
-    <footer class="page-footer">
-
-        <div class="footer-copyright">
-            <div class="container">
-                Copyright © 2015 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Agil</a> All rights reserved.
-                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://Bluehawk.com/">BlueHawk</a></span>
-            </div>
-        </div>
+    <footer class="footer ">
+        <div class="container">
+            Copyright © 2016 <a class="" href="" target="">Good Life</a> All rights reserved.
+                <span class="pull-right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://Bluehawk.com/">BlueHawk</a></span>
+        </div><!--//container-->
     </footer>
     <!-- END FOOTER -->
     {%endif%}
+
+   
 
     <!-- ================================================
     Scripts

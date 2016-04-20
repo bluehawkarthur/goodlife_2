@@ -3,84 +3,84 @@
 {% block content %}
 	
 <div class="container">
-	<div class="row">
-		<h3>Detalle de cliente: {{object.codigo_gl}}</h3>
+    <h1 class="text-center">Detalle de Cliente Good Life</h1>
+    <form class="form-horizontal" method='POST'>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="" class="col-sm-5 control-label2">Ciudad de origen:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.ciudad_origen}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Codigo GL:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.codigo_gl}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Fecha de Ingreso:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.fecha_ingreso}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Nombres:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.nombres}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Apellidos:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.apellidos}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">CI:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.ci}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Telefono:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.telefono}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Cel:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.cel}}</p>
+            </div>
+          </div><!-- End form-group  -->
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="" class="col-sm-5 control-label2">Empresa:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.empresa}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Tramite:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.tramite}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">AFP:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.afps}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Clinica:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.clinica}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Persona de referencia:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.persona_referencia}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Telefono de referencia:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.telefono_per_referencia}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Cel de referencia:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.cel_per_referencia}}</p>
+            </div>
+          </div><!-- End form-group  -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <a href="/listar_cliente/" class="btn btn-lg btn-block btn-warning">Volver</a>
+        </div>
+      </div>
 
-		<dl class="dl-horizontal">
-		<dt>Codigo De cliente:</dt>
-		<dd>{{object.codigo_gl}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Fecha de ingreso:</dt>
-		<dd>{{object.fecha_ingreso}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Ciudad de origen:</dt>
-		<dd>{{object.nombres}}</dd>
-		</dl>
-		
-		<dl class="dl-horizontal">
-		<dt>Nombres:</dt>
-		<dd>{{object.codigo_gl}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Apellidos:</dt>
-		<dd>{{object.apellidos}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>CI:</dt>
-		<dd>{{object.ci}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Telefono:</dt>
-		<dd>{{object.telefono}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Cel:</dt>
-		<dd>{{object.cel}}</dd>
-		</dl>
-		
-		<dl class="dl-horizontal">
-		<dt>Empresa:</dt>
-		<dd>{{object.empresa}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Tramite:</dt>
-		<dd>{{object.tramite}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>AFP:</dt>
-		<dd>{{object.afps}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Clinica:</dt>
-		<dd>{{object.clinica}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Persona de referencia:</dt>
-		<dd>{{object.persona_referencia}}</dd>
-		</dl>
-		
-		<dl class="dl-horizontal">
-		<dt>Telefono de referencia:</dt>
-		<dd>{{object.telefono_per_referencia}}</dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		<dt>Cel de referencia:</dt>
-		<dd>{{object.cel_per_referencia}}</dd>
-		</dl>
-	</div>
-</div>
-
+      </form>
+  </div>
 {% endblock content %}

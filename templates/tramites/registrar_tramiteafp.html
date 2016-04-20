@@ -2,14 +2,32 @@
 
 {% block content %}
 	<div class="container">
-		<div class="row">
-			<h3>Registrar AFP:</h3>
-			<form action="" method='POST'>{% csrf_token %}
-				{{form.as_p}}
-				<input type="submit" value='Registrar'>
-			</form>
-
-		</div>
-	</div>
+  <div class="row">
+    <form class="form-horizontal" method='POST'>{% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        <h1 class="">Registrar AFP:</h1>
+          <div class="form-group">
+            <label for="" class="col-sm-5 control-label2">Tipo de Tramite:</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="" name='tipo_afp'>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Observaciones:</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="" name='tipo_tramite'>
+            </div>
+          </div><!-- End form-group  -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+          <button type="submit" class="btn btn-success btn-lg btn-block">Crear Tramite</button>
+          <br>
+          <a href="/listar_tramite/" class="btn btn-lg btn-block btn-warning">Cancel</a>
+        </div>
+      </div>
+      </form>
+  </div>
+</div>
 {% endblock content %}
 	

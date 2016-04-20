@@ -5,35 +5,36 @@
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-default padtop">
-	<!-- Default panel contents -->
-		<div class="panel-heading">Lista de Clientes de Good Life:<a href="/registrar_cliente/"><button type="button" class="btn btn-primary pull-right fixbutcrear">Crear Cliente</button>
-	</a>
-	</div>
-	<!-- Table -->
-		<table class="table">
-			<thead>
-				<th>Codigo Cliente</th>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Detalle</th>
-				<th>Modificar</th>
-				<th>Eliminar</th>
-			</thead>
-			<tbody>
-			{% for object in object_list %}
-				<tr>
-					<td>{{object.codigo_gl}}</td>
-					<td>{{object.nombres}}</td>
-					<td>{{object.apellidos}}</td>
-					<td><a href="/detail_cliente/{{object.id}}">Ver</a></td>
-					<td><a href="/update_cliente/{{object.id}}">Editar</a></td>
-					<td><a href="/delete_cliente/{{object.id}}">Delete</a></td>
-				</tr>
-			{% endfor %}
-			</tbody>
-		</table>
-	</div>
-
+			<!-- Default panel contents -->
+				<div class="panel-heading"><h3 class='fixh3'>Lista de Clientes de Good Life:</h3>
+					<a href="/registrar_cliente/">
+					<button type="button" class="btn btn-success pull-right fixbutcrear">Crear Cliente</button>
+					</a>
+				</div>
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<th>Codigo Cliente</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Detalle</th>
+						<th>Modificar</th>
+						<th>Eliminar</th>
+					</thead>
+					<tbody>
+					{% for object in object_list %}
+						<tr>
+							<td>{{object.codigo_gl}}</td>
+							<td>{{object.nombres}}</td>
+							<td>{{object.apellidos}}</td>
+							<td><a href="/detail_cliente/{{object.id}}">Ver</a></td>
+							<td><a href="/update_cliente/{{object.id}}">Editar</a></td>
+							<td><a href="/delete_cliente/{{object.id}}">Delete</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	

@@ -9,7 +9,7 @@ from .models import Empresa
 class RegistarEmpresa(CreateView):
 	template_name = 'empresas/registrar_empresa.html'
 	model = Empresa
-	fields = ('razon_social', 'direccion', 'telefono1', 'telefono2')
+	fields = ('razon_social', 'direccion', 'telefono1', 'telefono2', 'nro_patronal', 'departamento', 'municipios')
 	success_url = reverse_lazy('listar_empresa')
 
 
@@ -27,7 +27,7 @@ class EmpresaDetail(DetailView):
 class EmpresaUpdateView(UpdateView):
 	template_name = 'empresas/update_empresa.html'
 	model = Empresa
-	fields = ('razon_social', 'direccion', 'telefono1', 'telefono2')
+	fields = ('razon_social', 'direccion', 'telefono1', 'telefono2', 'nro_patronal', 'departamento', 'municipios')
 	success_url = reverse_lazy('listar_empresa')
 
 

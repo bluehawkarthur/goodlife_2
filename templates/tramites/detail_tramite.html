@@ -2,18 +2,30 @@
 
 {% block content %}
 <div class="container">
-	<div class="row">
-		<h3>Detalle de tramite: {{object.tipo_tramite}}</h3>
-		<dl class="dl-horizontal">
-		<dt>Tipo de tramite:</dt>
-		<dd>{{object.tipo_tramite}}</dd>
-		</dl>
-		
-		<dl class="dl-horizontal">
-		<dt>Observaciones:</dt>
-		<dd>{{object.observaciones}}</dd>
-		</dl>
+  <div class="row">
+    <form class="form-horizontal">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        <h1 class="">Detalle de tramite:</h1>
+          <div class="form-group">
+            <label for="" class="col-sm-5 control-label2">Tipo de Tramite:</label>
+            <div class="col-sm-10">
+            <p class="form-control">{{object.tipo_tramite}}</p>
+            </div>
+            <label for="" class="col-sm-5 control-label2">Observaciones:</label>
+            <div class="col-sm-10">
+              <p class="form-control">{{object.observaciones}}</p>
+            </div>
+          </div><!-- End form-group  -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+          <a href="/listar_tramite/" class="btn btn-lg btn-block btn-warning">Volver</a>
+        </div>
+      </div>
 
-	</div>
+      </form>
+  </div>
 </div>
 {% endblock content %}

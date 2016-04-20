@@ -3,14 +3,21 @@ from django.views.generic import TemplateView, FormView, RedirectView
 from .forms import LoginForm
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class Inicio(TemplateView):
-	template_name = 'inicio/index.html'
+  template_name = 'inicio/index.html'
 
 
 class Main(TemplateView):
-	template_name = 'inicio/main.html'
+  template_name = 'inicio/main.html'
+
+  @method_decorator(login_required)
+  def dispatch(self, *args, **kwargs):
+      return super(Main, self).dispatch(*args, **kwargs)
+
 
 
 class LoginView(FormView):
