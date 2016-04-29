@@ -1,128 +1,129 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
-	<div class="container">
-    <h1 class="">Modificar Datos de Cliente Good Life</h1>
-    <form class="form-horizontal" method='POST'>{% csrf_token %}
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Ciudad de origen:</label>
-            <div class="col-sm-10">
-              <!--input type="email" class="form-control" id="" name='ciudad_origen'-->
-              <select id="id_ciudad_origen" name="ciudad_origen" class="form-control">
-                <option value="" selected="selected">---------</option>
-                <option value="Beni">Beni</option>
-                <option value="Chuquisaca">Chuquisaca</option>
-                <option value="Cochabamba">Cochabamba</option>
-                <option value="La Paz">La Paz</option>
-                <option value="Oruro">Oruro</option>
-                <option value="Pando">Pando</option>
-                <option value="Potosi">Potosi</option>
-                <option value="Santa Cruz">Santa Cruz</option>
-                <option value="Tarija">Tarija</option>
-              </select>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Codigo GL:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" name='codigo_gl'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Fecha de Ingreso:</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="" name='fecha_ingreso'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Nombres:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" name='nombres'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Apellidos:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" name='apellidos'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">CI:</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="" name='ci'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono:</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="" name='telefono'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Cel:</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="" name='cel'>
-            </div>
-          </div><!-- End form-group  -->
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Empresa:
-            </label>
-            <div class="col-sm-10">
-              <!--input type="email" class="form-control" id="" name='empresa'-->
-              <select id="id_empresa" name="empresa" class="form-control">
-                <option value="" selected="selected">---------</option>
-                <option value="1">Blue Hawk</option>
-                <option value="4">Boa Bolivia</option>
-                <option value="5">Empetrol</option>
-                <option value="6">MIEmpresa</option>
-                <option value="7">Facebook</option>
-              </select>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Tramite:</label>
-            <div class="col-sm-10">
-              <!--input type="email" class="form-control" id="" name='tramite'-->
-              <select id="id_tramite" name="tramite" class="form-control">
-                <option value="" selected="selected">---------</option>
-                <option value="1">Jubilacion</option>
-                <option value="4">Invalidez</option>
-                <option value="5">aaaaaa</option>
-                <option value="6">qqq</option>
-              </select>
-            </div>
-            <label for="" class="col-sm-5 control-label2">AFP:</label>
-            <div class="col-sm-10">
-              <!--input type="email" class="form-control" id="" name='afps'-->
-              <select id="id_afps" name="afps" class="form-control">
-                <option value="" selected="selected">---------</option>
-                <option value="1">Futuro</option>
-                <option value="3">Prevision</option>
-              </select>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Clinica:
-            </label>
-            <div class="col-sm-10">
-              <!--input type="email" class="form-control" id="" name='clinica'-->
-              <select id="id_clinica" name="clinica" class="form-control">
-                <option value="" selected="selected">---------</option>
-                <option value="3">San Pedro</option>
-              </select>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Persona de referencia:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" name='persona_referencia'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono de referencia:</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="" name='telefono_per_referencia'>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Cel de referencia:</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="" name='cel_per_referencia'>
-            </div>
-          </div><!-- End form-group  -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <button type="submit" class="btn btn-success btn-lg btn-block">Modificar</button>
-        </div>
-        <div class="col-md-5 col-md-offset-1">
-          <a href="/listar_cliente/" class="btn btn-lg btn-block btn-warning">Cancel</a>
-        </div>
-      </div>
+{% load widget_tweaks %}
 
-      </form>
-  </div>
-  
-{% endblock content %}
-	
+
+<div class="container">
+  <div class="row">
+    <form class=""  method="POST" enctype='multipart/form-data'>
+      <div class="card-panel">
+        <h3 class="header2">Registrar Cliente</h3>
+          {% csrf_token %} 
+          
+
+    <div class="bootstrap-iso">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <form method="post">
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.fecha_ingreso.label }}</label>
+                    {{ form.fecha_ingreso|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.codigo_gl.label }}</label>
+                    {{ form.codigo_gl|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.ciudad_origen.label }}</label>
+                     {{ form.ciudad_origen|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.nombres.label }}</label>
+                     {{ form.nombres|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.apellidos.label }}</label>
+                     {{ form.apellidos|add_class:"form-control" }}
+                  </div>
+                   <div class="col-xs-6">
+                    <label class="control-label">{{ form.edad.label }}</label>
+                     {{ form.edad|add_class:"form-control" }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.ci.label }}</label>
+                     {{ form.ci|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.telefono.label }}</label>
+                     {{ form.telefono|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.cel.label }}</label>
+                     {{ form.cel|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.foto.label }}</label>
+                     {{ form.foto|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.activo.label }}</label>
+                     {{ form.activo|add_class:"form-control" }}
+                  </div>
+                   <div class="col-xs-6">
+                    <label class="control-label">{{ form.empresa.label }}</label>
+                     {{ form.empresa|add_class:"form-control" }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.tramite.label }}</label>
+                     {{ form.tramite|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.afps.label }}</label>
+                     {{ form.afps|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.clinica.label }}</label>
+                     {{ form.clinica|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.persona_referencia.label }}</label>
+                     {{ form.persona_referencia|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.telefono_per_referencia.label }}</label>
+                     {{ form.telefono_per_referencia|add_class:"form-control" }}
+                  </div>
+                   <div class="col-xs-6">
+                    <label class="control-label">{{ form.cel_per_referencia.label }}</label>
+                     {{ form.cel_per_referencia|add_class:"form-control" }}
+                  </div>
+                  <div class="col-xs-6">
+                    <label class="control-label">{{ form.usuario.label }}</label>
+                     {{ form.usuario|add_class:"form-control" }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <button class="btn btn-primary " name="submit" type="submit">
+                    Submit
+                  </button>
+                   <a href="/listar_cliente" class="btn btn-lg btn-warning"><i class="left"></i> Volver  Atras</a>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_!%@iaace&btm)e-1od33)pk05hyj%gd7vj!u8se3w*abzz5_%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'material',
+    'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +45,8 @@ INSTALLED_APPS = (
     'apps.clientes',
     'apps.tramites',
     'apps.inicio',
+    #PAQUETES
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (

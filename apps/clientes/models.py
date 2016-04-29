@@ -16,21 +16,25 @@ DEP_CHOICES = (
 )
 
 class Cliente(models.Model):
-	codigo_gl = models.IntegerField()
-	fecha_ingreso = models.DateField()
+	codigo_gl = models.CharField(max_length=20)
+	fecha_ingreso = models.DateField(null=True, blank=True)
 	ciudad_origen = models.CharField(max_length=50, choices=DEP_CHOICES)
 	nombres = models.CharField(max_length=100)
 	apellidos = models.CharField(max_length=100)
+	edad = models.IntegerField()
 	ci = models.BigIntegerField()
 	telefono = models.IntegerField()
 	cel = models.IntegerField()
-	empresa = models.ForeignKey(Empresa)
-	tramite = models.ForeignKey(Tramite)
-	afps = models.ForeignKey(TramiteAfp)
-	clinica = models.ForeignKey(Clinica)
+	foto = models.ImageField(upload_to='clientes', null=True, blank=True)
+	activo = models.BooleanField()
+	empresa = models.ForeignKey(Empresa, null=True, blank=True)
+	tramite = models.ForeignKey(Tramite, null=True, blank=True)
+	afps = models.ForeignKey(TramiteAfp, null=True, blank=True)
+	clinica = models.ForeignKey(Clinica, null=True, blank=True)
 	persona_referencia = models.CharField(max_length=150)
 	telefono_per_referencia = models.IntegerField()
 	cel_per_referencia = models.IntegerField()
+	usuario = models.CharField(max_length=50)
 
 	def __unicode__(self):
 		return "%s-%s-%s" % (self.codigo_gl, self.nombres, self.apellidos)
@@ -38,6 +42,7 @@ class Cliente(models.Model):
 
 class DtoCodigo(models.Model):
 	departamento = models.CharField(max_length=50, choices=DEP_CHOICES)
+	short = models.CharField(max_length=4, null=True, blank=True)
 	cantidad = models.IntegerField(default=0)
 
 	def __unicode__(self):
