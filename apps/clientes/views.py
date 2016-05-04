@@ -11,6 +11,7 @@ import json
 from datetime import date
 from django.db.models import Q
 import operator
+from pure_pagination.mixins import PaginationMixin
 
 
 def RegistrarCliente(request):
@@ -57,8 +58,9 @@ def RegistrarCliente(request):
 	return render_to_response('clientes/registrar_cliente.html', variables)
 
 
-class ClienteList(ListView):
+class ClienteList(PaginationMixin, ListView):
   template_name = 'clientes/lista_cliente.html'
+  paginate_by = 1
   model = Cliente
 
   def get_queryset(self):

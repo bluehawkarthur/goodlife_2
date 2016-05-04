@@ -1,0 +1,41 @@
+{% load i18n %}
+    
+
+<footer class="panel-footer">
+    <div class="row">
+        <div class="col-sm-4 hidden-xs">
+            
+        </div>
+        <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">pagina {{page_obj.number}}-{{page_obj.pages|length}} de {{object_list.count}} items  </small> </div>
+
+        <div class="col-sm-4 text-right text-center-xs">
+            <ul class="pagination pagination-sm m-t-none m-b-none">
+                {% if page_obj.has_previous %}
+                    <li class="prev"><a class="num" href="?{{ page_obj.previous_page_number.querystring }}"><i class="icon-chevron-left"></i></a></li>
+                {% else %}
+                    <li class="disabled"><a href="#"><i class="icon-chevron-left"></i></a></li>
+                {% endif %}
+
+                
+                {% for page in page_obj.pages %}
+                    {% if page %}
+                        {% ifequal page page_obj.number %}
+                            <li class="active"><a href="#">{{ page }}</a></li>
+                        {% else %}
+                            <li><a class="num" href="?{{ page.querystring }}" class="waves-effect">{{ page }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <li class=""><a class="num" href="?{{ page_obj.next_page_number.querystring }}"><i class="icon-chevron-right"></i></a></li>
+
+                {% else %}
+                    <li class="disabled next"><a class="num" href="#"><i class="icon-chevron-right"></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</footer>
