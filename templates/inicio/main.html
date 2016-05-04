@@ -1,123 +1,150 @@
-{% extends 'base.html' %}
-
-{% block menu %}
-	
-{% endblock menu %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
-	<div class="container">
-		    <!-- FIRST ROW OF BLOCKS -->     
-      <h1 class='text-center h1-main'>GOOD LIFE <span>Consultora de Pensiones y Prevision Social</span></h1>
-      <div class="row">
-        <div class="col-sm-3 col-lg-3">
-        <a href="/listar_cliente/">
-          <div class="dash-unit">
-            <h3>Clientes</h3>
-            <hr>
-            <h3>Listar</h3>
-            <h3>Registrar</h3>
-            <h3>Editar</h3>
-            <h3>Eliminar</h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-        <a href="/listar_empresa/">
-          <div class="dash-unit">
-            <h3>Empresas</h3>
-            <hr>
-            <h3>Listar</h3>
-            <h3>Registrar</h3>
-            <h3>Editar</h3>
-            <h3>Eliminar</h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-        <a href="/listar_clinica/">
-          <div class="dash-unit">
-            <h3>Clinicas</h3>
-            <hr>
-            <h3>Listar</h3>
-            <h3>Registrar</h3>
-            <h3>Editar</h3>
-            <h3>Eliminar</h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-        <a href="/listar_tramite/">
-          <div class="dash-unit">
-            <h3>Tramites</h3>
-            <hr>
-            <h3>Listar</h3>
-            <h3>Registrar</h3>
-            <h3>Editar</h3>
-            <h3>Eliminar</h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
+{% load staticfiles %}
+	<section id="content">
+            <section class="vbox">
+                <header class="header bg-white b-b">
+                    <p>Bienvenido a la aplicación Good Life</p>
+                </header>
+                <section class="scrollable wrapper">
+                    <div class="row">
+                       
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <a href="/listar_cliente">
+                                        <header class="panel-heading bg-success lter">
+                                            <div class="text-center  jumbotron-icon">
+                                                <i class="fa fa-users fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        </a>
+                                        <div class="panel-body">
+                                            <div> <span class="h3 block">Clientes</span> </div>
+                                           
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <a href="/listar_empresa">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                 <i class="fa fa-building-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        </a>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">Empresas</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
 
-      </div><!-- /row -->
-      <div class="row">
-        <div class="col-sm-3 col-lg-3">
-        <a href="/listar_tramiteafp/">
-          <div class="dash-unit">
-            <h3>AFP</h3>
-            <hr>
-            <h3>Listar</h3>
-            <h3>Registrar</h3>
-            <h3>Editar</h3>
-            <h3>Eliminar</h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-          <div class="dash-unit">
-            <h3>En construccion</h3>
-            <hr>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3></h3>
-          </div>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-          <div class="dash-unit">
-            <h3>En construccion</h3>
-            <hr>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3>Lorem</h3>
-            <h3></h3>
-          </div>
-        </div>
-        <div class="col-sm-3 col-lg-3">
-        <a href="/logout/">
-          <div class="dash-unit">
-            <h3>Salir</h3>
-            <hr>
-            <h3>Logout</h3>
-            <h3></h3>
-            <h3></h3>
-            <h3></h3>
-            <h3></h3>
-          </div>
-        </a>
-        </div>
-
-      </div><!-- /row --> 
-
-	</div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <a href="/listar_clinica">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-hospital-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        </a>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">Clinicas</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <a href="/listar_tramite">
+                                        <header class="panel-heading bg-success lter">
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-tasks fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        </a>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">Tramites</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <a href="/listar_tramiteafp">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-at fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        </a>
+                                        <div class="panel-body">
+                                            <div> <span class="h3 block">AFP</span> </div>
+                                           
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-file-code-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">En construccion</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                               <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-file-code-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">En construccion</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-file-code-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">En construccion</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <section class="panel no-borders">
+                                        <header class="panel-heading bg-success lter"> 
+                                            <div class="text-center jumbotron-icon">
+                                                <i class="fa fa-file-code-o fa-5" aria-hidden="true"></i>
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <div>  <span class="h3 block">En construccion</span> </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                           
+                           
+                        
+                        
+                    </div>
+                </section>
+            </section>
+            <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="body"></a>
+        </section>
 {% endblock content %}
-
-{% block footer %}
-	
-{% endblock footer %}

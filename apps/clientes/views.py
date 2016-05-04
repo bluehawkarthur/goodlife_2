@@ -9,6 +9,8 @@ from .forms import ClienteForm
 import json
 
 from datetime import date
+from django.db.models import Q
+import operator
 
 
 def RegistrarCliente(request):
@@ -58,6 +60,28 @@ def RegistrarCliente(request):
 class ClienteList(ListView):
   template_name = 'clientes/lista_cliente.html'
   model = Cliente
+
+  def get_queryset(self):
+        descripcion = self.request.GET.get('q', None)
+        dt = "%s" % descripcion
+        d_list = dt.split(" ")
+        q = d_list
+
+        q_objects = []
+
+        for item in q:
+            q_objects.append(Q(ci__icontains=item))
+            q_objects.append(Q(codigo_gl__icontains=item))
+            q_objects.append(Q(nombres__icontains=item))
+            q_objects.append(Q(apellidos__icontains=item))
+
+        query = reduce(operator.or_, q_objects)
+
+        if (descripcion):
+            object_list = self.model.objects.filter(query)
+        else:
+            object_list = self.model.objects.all().order_by('pk')
+        return object_list
 
 
 class ClienteDetail(DetailView):

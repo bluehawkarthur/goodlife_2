@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, RedirectView
+from django.shortcuts import render, HttpResponseRedirect
+from django.views.generic import TemplateView, FormView, RedirectView, View
 from .forms import LoginForm
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import login, logout
@@ -7,8 +7,20 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
+class Index(View):
+
+    def get(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated():
+            return HttpResponseRedirect(reverse_lazy('inicio'))
+        else:
+            return HttpResponseRedirect(reverse_lazy('main'))
+
+
 class Inicio(TemplateView):
   template_name = 'inicio/index.html'
+
+
 
 
 class Main(TemplateView):

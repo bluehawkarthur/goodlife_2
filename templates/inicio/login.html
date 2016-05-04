@@ -1,33 +1,47 @@
 {% extends 'base.html' %}
+
 {% block content %}
-  
-<body>
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h1 class="text-center">Login</h1>
-      </div>
-      <div class="modal-body">
-          <form class="form col-md-12 center-block" method='POST'>{% csrf_token %}
-            <div class="form-group">
-              <input type="text" class="form-control input-lg" name='username' placeholder="Usuario">
+{% load widget_tweaks %}
+<body style="background-color: #91CE5B;">
+    <section id="content" class="m-t-lg wrapper-md animated fadeInUp"> <a class="nav-brand" href="/">Good Life</a>
+        <div class="row m-n">
+            <div class="col-md-4 col-md-offset-4 m-t-lg">
+                <section class="panel">
+                    <header class="panel-heading text-center"> Login </header>
+                    
+                    <form  class="panel-body" method='POST'>
+                      {% csrf_token %}
+                      {% if form.non_field_errors%}
+                      <div class="alert alert-danger"> 
+                        <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                        </button> 
+                        <i class="icon-ban-circle"></i>
+                        <strong>{{form.non_field_errors|removetags:"ul li"}}</strong>  </div>
+                      {% endif %}
+
+                      <div class="form-group"> 
+                        <label class="control-label">Usuario</label>
+                        
+                        {{ form.username|add_class:"form-control"|add_error_class:"parsley-error"|attr:"placeholder:Usuario" }}
+                        <span class="help-block">{{ form.errors.username|removetags:'ul li' }}</span>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Password</label>
+                        {{ form.password|add_class:"form-control"|add_error_class:"parsley-error"|attr:"placeholder:Password" }}
+                        <span class="help-block">{{ form.errors.password|removetags:'ul li' }}</span>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Ingresar</button>
+                      <div class="line line-dashed"></div> 
+                      <div class="line line-dashed"></div>
+                      
+                    </form>
+                </section>
             </div>
-            <div class="form-group">
-              <input type="password" class="form-control input-lg" name='password' placeholder="Password">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-success btn-lg btn-block">Sign In</button>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-          <div class="col-md-12">
-          <a href="/" class="btn btn-lg btn-block btn-warning">Cancel</a>
-          </div>  
-      </div>
-  </div>
-  </div>
-</div>
+        </div>
+    </section>
 </body>
+    
+    
 {% endblock content %}
+

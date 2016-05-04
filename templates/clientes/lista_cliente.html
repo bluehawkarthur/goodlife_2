@@ -1,45 +1,114 @@
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
-<div class="container">
-	<div class="panel panel-default">
-<!-- Default panel contents -->
-		<div class="panel-heading"><h3 class='fixh3'>Lista de Clientes de Good Life:</h3>
-			<a href="/registrar_cliente/"><button type="button" class="btn btn-success pull-right fixbutcrear">Crear Cliente</button>
-			</a>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-		    	<div class="table-responsive">
-			        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
-			          <thead>
-			            <tr>
-			            	<th>Codigo Cliente</th>
-							<th>Nombres</th>
-							<th>Apellidos</th>
-							<th>Detalle</th>
-							<th>Modificar</th>
-							<th>Eliminar</th>
-			            </tr>
-				        </thead>
-							<tbody>
-						{% for object in object_list %}
-							<tr>
-								<td>{{object.codigo_gl}}</td>
-								<td>{{object.nombres}}</td>
-								<td>{{object.apellidos}}</td>
-								<td><a href="/detail_cliente/{{object.id}}">Ver</a></td>
-								<td><a href="/update_cliente/{{object.id}}">Editar</a></td>
-								<td><a href="/delete_cliente/{{object.id}}">Delete</a></td>
-							</tr>
-						{% endfor %}
-						</tbody>
-			        </table>
-		    	</div><!--end of .table-responsive-->
-		    </div>
-		</div>
-	</div>	
-</div>	
+<section id="content">
+	<section class="vbox">
+		<header class="header bg-success bg-gradient">
+	        <ul class="nav nav-tabs">
+	            <li class="active"><a href="#static" data-toggle="tab">Clientes</a></li>
+	        </ul>
+	    </header>
+	    <section class="scrollable wrapper">
+			<div class="tab-content">
+				<div class="panel panel-default">
+			<!-- Default panel contents -->
+					<section class="panel">
+					    <header class="panel-heading"> Lista de Clientes de Good Life: </header>
+					    <div class="row text-sm wrapper">
+					        <div class="col-sm-5 m-b-xs">
+					            
+					            
+					            <a class="btn btn-sm btn-success" href="/registrar_cliente/">Crear Cliente</a>
+
+					        </div>
+					        <div class="col-sm-4 m-b-xs">
+					            
+					        </div>
+					        <div class="col-sm-3">
+					        	<form method="get">
+					            <div class="input-group">
+					                <input type="text" class="input-sm form-control" placeholder="buscar" name="q"> <span class="input-group-btn"> <button class="btn btn-sm btn-white" type="submit">Buscar</button> </span> </div>
+					            </form>
+					        </div>
+					    </div>
+					    <div class="table-responsive">
+					        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+						          <thead>
+						            <tr>
+						            	<th>Codigo Cliente</th>
+						            	<th>CI</th>
+										<th>Nombres</th>
+										<th>Apellidos</th>
+										<th>Detalle</th>
+										<th>Modificar</th>
+										<th>Eliminar</th>
+						            </tr>
+							        </thead>
+										<tbody>
+									{% for object in object_list %}
+										<tr>
+											<td>{{object.codigo_gl}}</td>
+											<td>{{object.ci}}</td>
+											<td>{{object.nombres}}</td>
+											<td>{{object.apellidos}}</td>
+											<td>
+												<a class="btn btn-default" href="/detail_cliente/{{object.id}}"><i class="icon-eye-open text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-warning" href="/update_cliente/{{object.id}}"><i class="icon-edit text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modalDel{{object.id}}"><i class="fa fa-trash-o text"></i></a>
+												<!-- Modal -->
+												<div class="modal fade" id="modalDel{{object.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												  <div class="modal-dialog" role="document">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												        <h4 class="modal-title" id="myModalLabel">Eliminar cliente</h4>
+												      </div>
+												      <div class="modal-body">
+												        <p class="img-dashboard">Esta seguro que quiere eliminar "{{object.nombres}}"</p>
+												      </div>
+												      <div class="modal-footer">
+												        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+												   
+												        <a href="/delete_cliente/{{object.id}}" class="btn btn-primary">Eliminar</a>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+						        </table>
+					    </div>
+					    <footer class="panel-footer">
+					        <div class="row">
+					            <div class="col-sm-4 hidden-xs">
+					                
+					            </div>
+					            <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small> </div>
+					            <div class="col-sm-4 text-right text-center-xs">
+					                <ul class="pagination pagination-sm m-t-none m-b-none">
+					                    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+					                    <li><a class="num" href="#">1</a></li>
+					                    <li><a class="num" href="#">2</a></li>
+					                    <li><a class="num" href="#">3</a></li>
+					                    <li><a class="num" href="#">4</a></li>
+					                    <li><a class="num" href="#">5</a></li>
+					                    <li><a class="num" href="#"><i class="icon-chevron-right"></i></a></li>
+					                </ul>
+					            </div>
+					        </div>
+					    </footer>
+					</section>
+						
+			</div>
+		</section>
+	</section>
+</section>
 	
 {% endblock content %}	
 	

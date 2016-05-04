@@ -1,570 +1,152 @@
 {% extends "base.html" %}
-{% block titulo %}
-    Good Life
-{% endblock titulo %}
-
+{% block menuinit %}
+    <header id="header" class="navbar navbar-fixed-top bg-primary dk" data-spy="affix" data-offset-top="1">
+        <div class="container"> <a class="navbar-brand" href="/">Good Life</a>
+           
+            <ul class="nav navbar-nav pull-right hidden-xs">
+                <li class="hide"> <a href="#header">Home</a> </li>
+                <li>
+                    <div>  <a href="index.html" target="_blank" class="btn btn-sm btn-primary m-t m-r">Preview <i class="icon-arrow-right"></i></a> </div>
+                </li>
+                <li> <a href="#about">Quienes Somos</a> </li>
+                <li> <a href="#features">Nuestro Trabajo</a> </li>
+                <li> <a href="#features">Tramites</a> </li>
+                <li> <a href="#features">portfolio</a> </li>
+                <li> <div> <a href="/login" class="btn btn-sm btn-primary m-t m-r"><i class="icon-user"></i> Login</a></div></li>
+            </ul>
+        </div>
+    </header>
+{% endblock menuinit %}
 {% block content %}
-
 {% load staticfiles %}
-<!DOCTYPE HTML>
-<html>
-	<head>
-		
-		
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		</script>
-		<!---- animated-css ---->
-		
-		<script>
-		 new WOW().init();
-		</script>
-		<!---- animated-css ---->
-		<!---- start-smoth-scrolling---->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-			});
-		</script>
-		 <!---- start-smoth-scrolling---->
-		<!----webfonts--->
-		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-		<!---//webfonts--->
-		<!----start-top-nav-script---->
-		<script>
-			$(function() {
-				var pull 		= $('#pull');
-					menu 		= $('nav ul');
-					menuHeight	= menu.height();
-				$(pull).on('click', function(e) {
-					e.preventDefault();
-					menu.slideToggle();
-				});
-				$(window).resize(function(){
-	        		var w = $(window).width();
-	        		if(w > 320 && menu.is(':hidden')) {
-	        			menu.removeAttr('style');
-	        		}
-	    		});
-			});
-		</script>
-		<!----//End-top-nav-script---->
-	</head>
-	<body>
-		<div class="bg">
-		<!----- start-header---->
-		<div class="container">
-			<div id="home" class="header wow bounceInDown" data-wow-delay="0.4s">
-					<div class="top-header">
-						<div class="logo">
-							<a href="#">GoodLife</a>
-						</div>
-						<!----start-top-nav---->
-						 <nav class="top-nav">
-							<ul class="top-nav">
-								<li><a href="#about" class="scroll">Quienes Somos</a></li>
-								<li><a href="#process" class="scroll">Nuestro Trabajo</a></li>
-								<li><a href="#blog" class="scroll">Tramites</a></li>
-								<li><a href="#port" class="scroll">portfolio</a></li>
-								<li class="page-scroll"><a href="#contact" class="scroll">contact</a></li>
-								<li class="page-scroll"><a href="#team" class="scroll">Staff</a></li>
-								<li class="active-join" class="page-scroll"><a href="/login" class="">Login</a></li>
-							</ul>
-							<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
-						</nav>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
-			<!----- //End-header---->
-			<!---- banner-info ---->
-			<div class="banner-info">
-				<div class="container">
-					<h1 class="wow fadeIn" data-wow-delay="0.5s"><span>Good Life</span><<br /><label>Consultora de Pensiones y Previsión Social</label></h1>
-					
-				<div class="top-banner-grids wow bounceInUp" data-wow-delay="0.4s">
-					<div class="banner-grid text-center">
-						<span class="top-icon1"> </span>
-						<h3>analytics</h3>
-					</div>
-					<div class="banner-grid banner-grid-active text-center">
-						<span class="top-icon2"> </span>
-						<h3>strategy</h3>
-					</div>
-					<div class="banner-grid text-center">
-						<span class="top-icon3"> </span>
-						<h3>branding</h3>
-					</div>
-					<div class="banner-grid text-center">
-						<span class="top-icon4"> </span>
-						<h3>promotion</h3>
-					</div>
-					<div class="banner-grid text-center">
-						<span class="top-icon5"> </span>
-						<h3>sales</h3>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-			<!---- banner-info ---->
-			<!---- top-grids ---->
-			<div class="top-grids text-center">
-				<div class="container">
-					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-						<div class="top-grid">
-							<span class="icon1"> </span>
-							<h3><a href="#">right strategy</a></h3>
-							<label> </label>
-							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
-						</div>
-					</div>
-					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-						<div class="top-grid">
-							<span class="icon2"> </span>
-							<h3><a href="#">adaptive style</a></h3>
-							<label> </label>
-							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
-						</div>
-					</div>
-					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-						<div class="top-grid">
-							<span class="icon3"> </span>
-							<h3><a href="#">money making</a></h3>
-							<label> </label>
-							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
-						</div>
-					</div>
-					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-						<div class="top-grid">
-							<span class="icon4"> </span>
-							<h3><a href="#">brand keaping</a></h3>
-							<label> </label>
-							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
-						</div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-			<!---- top-grids ---->
-			<!---- about ---->
-			<div id="about" class="about">
-				<div class="head-section">
-					<div class="container">
-						<h3><span>about</span><label>ruddy .</label></h3>
-					</div>
-				</div>
-					<!--- about-grids ---->
-					<div class="about-grids">
-						<div class="col-md-4 about-grid about-grid1 wow fadeInLeft" data-wow-delay="0.4s">
-							<div class="about-grid-info">
-								<h4><a href="#">this is a point about the company</a></h4>
-								<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed </p>
-							</div>
-							<div class="about-grid-pic">
-							
-							<img src="{% static "images/about-pic1.jpg"%}" title="name" />
-							<!--img src="images/about-pic1.jpg"  title="name" /-->
-							</div>
-						</div>
-						<div class="col-md-4 about-grid about-grid2 wow fadeInUp" data-wow-delay="0.4s">
-							<div class="about-grid-pic">
-							<img src="{% static "images/about-pic2.jpg"%}" title="name" />
-							</div>
-							<div class="about-grid-info">
-								<h4><a href="#">this is a point about the company</a></h4>
-								<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed </p>
-							</div>
-						</div>
-						<div class="col-md-4 about-grid about-grid1 wow fadeInRight" data-wow-delay="0.4s">
-							<div class="about-grid-info">
-								<h4><a href="#">this is a point about the company</a></h4>
-								<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed </p>
-							</div>
-							<div class="about-grid-pic">
-							<img src="{% static "images/about-pic3.jpg"%}" title="name" />
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<!--- /about-grids ---->
-				</div>
-			</div>
-			<!---- about ----> 
-			
-			<!--- process --->
-			<div id="process" class="process">
-				<div class="head-section">
-					<div class="container">
-						<h3><span>Nuestro</span><label>Trabajo .</label></h3>
-					</div>
-				</div>
-				<div class="container">
-					<div class="process-grids text-center wow bounce" data-wow-delay="0.4s">
-						<div class="col-md-3 process-grid process-grid1 wow bounceInUp" data-wow-delay="0.4s">
-							<span class="p-icon1"> </span>
-							<h4><a href="#">meeting</a></h4>
-						</div>
-						<div class="col-md-3 process-grid process-grid2 wow bounceInDown" data-wow-delay="0.4s">
-							<span class="p-icon2"> </span>
-							<h4><a href="#">analysis</a></h4>
-						</div>
-						<div class="col-md-3 process-grid process-grid3 wow bounceInUp" data-wow-delay="0.4s">
-							<span class="p-icon3"> </span>
-							<h4><a href="#">making</a></h4>
-						</div>
-						<div class="col-md-3 process-grid process-grid4 wow bounceInDown" data-wow-delay="0.4s">
-							<span class="p-icon4"> </span>
-							<h4><a href="#">success</a></h4>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
-			<!--- process --->
-			<!--- blog ---->
-			<div class="blog">
-				<div class="head-section">
-					<div class="container">
-						<h3><span>Our</span><label>blog .</label></h3>
-					</div>
-				</div>
-				<!---- blog-grids ---->
-				<div class="blog-grids">
-					<div class="container"> 
-					<div class="blog-grids-leftNO">
-							<div class="blog-grid-left wow bounceIn" data-wow-delay="0.4s">
-								<div class="blog-art-pic">
-									<img src="{% static "images/b1.jpg"%}" title="name" />
-								</div>
-								<div class="blog-art-info">
-									<h3>Invalidez</h3>
-									<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate sed incidunt iusto placeat et, natus eius? Illum, perferendis qui asperiores esse numquam modi sapiente maiores nihil nisi vitae, possimus molestias!</p>
-								</div>
-							</div>
-							<div class="blog-grid-left wow bounceIn" data-wow-delay="0.4s">
-								<div class="blog-art-pic">
-									<img src="{% static "images/b2.jpg"%}" title="name" />
-								</div>
-								<div class="blog-art-info">
-									<h3>Jubilación</h3>
-									<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate sed incidunt iusto placeat et, natus eius? Illum, perferendis qui asperiores esse numquam modi sapiente maiores nihil nisi vitae, possimus molestias!</p>
-								</div>
-							</div>
-							<div class="blog-grid-left wow bounceIn" data-wow-delay="0.4s">
-								<div class="blog-art-pic">
-									<img src="{% static "images/b1.jpg"%}" title="name" />
-								</div>
-								<div class="blog-art-info">
-									<h3>Retiro de Aportes</h3>
-									<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate sed incidunt iusto placeat et, natus eius? Illum, perferendis qui asperiores esse numquam modi sapiente maiores nihil nisi vitae, possimus molestias!</p>
-								</div>
-							</div>
-						
-						
-					</div>
-				</div>
-				<!---- blog-grids ---->
-				</div>
-			</div>
-			<!--- blog ---->
-			<!--- portfolio ---->
-			<div id="port" class="portfolio">
-				<div class="head-section">
-					<div class="container">
-						<h3>portfolio .</h3>
-					</div>
-				</div>
-			<div id="port" class="portfolio-box">
-				
-					<!-- start-portfolio-script-->
-					<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
-					<script type="text/javascript">
-						$(function () {
-							var filterList = {
-								init: function () {
-								
-									// MixItUp plugin
-									// http://mixitup.io
-									$('#portfoliolist').mixitup({
-										targetSelector: '.portfolio',
-										filterSelector: '.filter',
-										effects: ['fade'],
-										easing: 'snap',
-										// call the hover effect
-										onMixEnd: filterList.hoverEffect()
-									});				
-								
-								},
-								hoverEffect: function () {
-									// Simple parallax effect
-									$('#portfoliolist .portfolio').hover(
-										function () {
-											$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
-											$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
-										},
-										function () {
-											$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
-											$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
-										}		
-									);				
-								
-								}
-					
-							};
-							// Run the show!
-							filterList.init();
-						});	
-					</script>
-					<div class="container">
-						<!-//End-portfolio-script-->
-						<ul id="filters" class="clearfix">
-							<li class="filtter-color1"><span class="filter active" data-filter="app card icon logo web">All</span></li>
-							<li class="filtter-color2"><span class="filter" data-filter="app">business</span></li>
-							<li class="filtter-color3"><span class="filter" data-filter="card">building</span></li>
-							<li class="filtter-color4"><span class="filter" data-filter="icon">medicine</span></li>
-							<li class="filtter-color5"><span class="filter" data-filter="app">entertainment</span></li>
-						</ul>
-					</div>
-					<div id="portfoliolist">
-					<div class="portfolio logo1 mix_all port-big-grid wow bounceIn" data-wow-delay="0.5s" data-cat="logo" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic1.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>				
-					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic2.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>		
-					<div class="portfolio web mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="web" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic3.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>				
-					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic4.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>	
-					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic5.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>			
-					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic6.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>	
-					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic7.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>	
-					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic8.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>			
-					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper">		
-							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
-						     <img class="p-img" src="{% static "images/portpic9.jpg"%}" /><div class="b-wrapper">
-						     	<h2 class="b-animate b-from-left    b-delay03 ">
-						     		<div class="caption">
-						     			<h4>heading of project</h4>
-						     			<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-						     		</div>
-						     	</h2>
-						  	</div></a>
-		                </div>
-					</div>	
-					<div class="clearfix"> </div>	
-				</div>
-			</div>
-				</div>
-			</div>
-			<!---- work-with-us---->
-			<div class="work-with-us text-center">
-				<div class="container">
-					<h4>YOU ALSO WANT? WORK WITH US!</h4>
-					<p>Send the application form for a free call and our manager will contact with you</p>
-					<a class="catch-me wow shake" data-wow-delay="0.3s" href="#">contact us</a>
-				</div>
-			</div>
-			<!---- work-with-us---->
-			<!--- portfolio ---->
-			<!---- Team ----->
-			<div id="team" class="team">
-				<div class="head-section">
-					<div class="container">
-						<h3><span>our amazing</span><label>team .</label></h3>
-					</div>
-				</div>
-				<!----sreen-gallery-cursual---->
-						<div class="sreen-gallery-cursual">
-							 <!-- requried-jsfiles-for owl -->
-							<link href="css/owl.carousel.css" rel="stylesheet">
-							    <script src="js/owl.carousel.js"></script>
-							        <script>
-							    $(document).ready(function() {
-							      $("#owl-demo").owlCarousel({
-							        items : 3,
-							        lazyLoad : true,
-							        autoPlay : true,
-							        navigation : true,
-							        navigationText :  false,
-							        pagination : false,
-							      });
-							    });
-							    </script>
-							 <!-- //requried-jsfiles-for owl -->
-							 <!-- start content_slider -->
-						       <div id="owl-demo" class="owl-carousel text-center">
-					                <div class="item wow zoomIn" data-wow-delay="0.3s">
-					                	<img class="lazyOwl" data-src="{% static "images/team-member1.png"%}" alt="name">
-					                	<h5><span>Peter</span> Holmes</h5>
-					                	<label>Marketing</label>
-					                </div>
-					                <div class="item wow zoomIn" data-wow-delay="0.3s">
-					                	<img class="lazyOwl" data-src="{% static "images/team-member2.png"%}" alt="name">
-					                	<h5><span>Kenny</span> Johns</h5>
-					                	<label>CEO</label>
-					                </div>
-					                <div class="item wow zoomIn" data-wow-delay="0.3s">
-					                	<img class="lazyOwl" data-src="{% static "images/team-member3.png"%}" alt="name">
-					                	<h5><span>Trisha </span> Steplton</h5>
-					                	<label>Designer</label>
-					                </div>
-					                <div class="item wow zoomIn" data-wow-delay="0.3s">
-					                	<img class="lazyOwl" data-src="{% static "images/team-member1.png"%}" alt="name">
-					                	<h5><span>Peter</span> Holmes</h5>
-					                	<label>Marketing</label>
-					                </div>
-					               
-				              </div>
-						<!--//sreen-gallery-cursual---->
-			</div>
-			</div>
-			<!---- Team ----->
-			<!---- map ---->
-			<div id="contact" class="map">
-				<div class="map-location">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1667809.5405374563!2d-98.19684021195167!3d35.27017247326614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87ac3911b1ac4f9d%3A0x5d1ccf33400aea48!2sOklahoma%2C+USA!5e0!3m2!1sen!2sin!4v1405178655430"> </iframe>
-				</div>
-				<div class="contact-info text-center wow fadeInLeft" data-wow-delay="0.3s">
-					<h4><span>Ruddy</span>Marketing Agency</h4>
-					<p><span class="map-icon1"> </span>119 N Salisbury NC 2760</p>
-					<p><span class="map-icon2"> </span>info@ruddy.com</p>
-					<p><span class="map-icon3"> </span>223-323-232-3232</p>
-				</div>
-			</div>
-			<!---- map ---->
-			<div class="clearfix"> </div>
-			<!---- footer --->
-			<div class="footer text-center">
-				<div class="container">
-					<div class="footer-inner wow zoomIn" data-wow-delay="0.3s">
-						<ul>
-							<li><a href="#"><img src="images/footer-logo.png" title="ruddy" /></a></li>
-							<li><a class="contact-me" href="#">contact us</a></li>
-						</ul>
-					</div>
-					<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
-				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-				</div>
-			</div>
-			<!---- footer --->
-		</div>
-	</body>
-</html>
--->
+<body data-spy="scroll" data-target="#header" class="landing">
+    <section id="content">
+        <div class="bg-primary dk">
+            <div class="carousel carousel-fade slide auto" id="c-slide">
+                <ol class="carousel-indicators">
+                    <li data-target="#c-slide" data-slide-to="0" class="active"></li>
+                    <li data-target="#c-slide" data-slide-to="1" class=""></li>
+                    <li data-target="#c-slide" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active row">
+
+                        <div class="col-xs-6 text-right"> <img src="{% static "images/familia-latina-2.png"%}" class="animated fadeInUpBig m-r-lg"> </div>
+                        <div class="col-sm-6">
+                            <h2 class="animated fadeInUp"><strong class="text-white">Good Life</strong>  <br><span class="font-thin" style="
+    font-size: 40px;">Consultora de Pensiones y Previcion Social</span></h2>
+                            <p>  </p>
+                        </div>
+                    </div>
+                    <div class="item row">
+                        <div class="col-xs-5 text-right">
+                            <h2 class="animated fadeInLeftBig"><strong class="text-white">8</strong> <span class="font-thin">Color <br>Palettes</span></h2>
+                            <p class="animated fadeInUpBig hidden-xs"> We provide eight color palettes for you. <br>you can use them to build colorful widgets and components. </p>
+                        </div>
+                        <div class="col-xs-7"> <img src="{% static "images/nic3b1o-familia-nic3b1a.png" %}" class="animated fadeInRightBig"> </div>
+                    </div>
+                    <div class="item row">
+                        <div class="col-xs-6 text-right"> <img src="{% static "images/correr-familia.png" %}" class="animated fadeInDownBig m-r-lg"> </div>
+                        <div class="col-xs-6">
+                            <h2 class="animated fadeInUp"><strong class="text-white">2</strong> <span class="font-thin">Runnable<br> Applications</span></h2>
+                            <p class="animated fadeInDown hidden-xs"> <strong>Tasks</strong> and <strong>Notes</strong> are built with Backbone with CRUD and Search functions. <br>Have Fun! </p>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#c-slide" data-slide="prev"> <i class="icon-angle-left"></i> </a>
+                <a class="right carousel-control" href="#c-slide" data-slide="next"> <i class="icon-angle-right"></i> </a>
+            </div>
+        </div>
+        <div id="about">
+            <div class="container">
+                <p>&nbsp;</p>
+                <div class="m-xl">
+                    <h2 class="font-thin">About this project</h2>
+                    <p>Responsive web application and admin panel template</p>
+                </div>
+                <div class="row m-xl">
+                    <div class="col-lg-6 col-sm-6 media"> <span class="icon-stack pull-left icon-4x"> <i class="icon-circle icon-stack-base text-info"></i> <i class="icon-mobile-phone text-white"></i> </span>
+                        <div class="media-body">
+                            <h3 class="m-t-none">Web application</h3>
+                            <p>Many mobile app widgets and components, it's fully responsive, it can run on all the size of the screen.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 media m-t-none"> <span class="icon-stack pull-left icon-3x"> <i class="icon-circle icon-stack-base text-warning"></i> <i class="icon-signal text-white"></i> </span>
+                        <div class="media-body">
+                            <h3 class="m-t-none">Admin panel</h3>
+                            <p>It also can be used as admin dashboard, it has tables, charts and other useful components for admin management.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light" id="features">
+            <div class="container">
+                <p>&nbsp;</p>
+                <div class="m-xl">
+                    <h2 class="font-thin">Features</h2>
+                    <p>Lightweight with rich components</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 lt wrapper-xl">
+                        <p class="text-center"> <span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-success"></i> <i class="icon-bold text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">Bootstrap 3.0</h3>
+                            <p>This project is based on Bootstrap 3. the sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 lter wrapper-xl">
+                        <p class="text-center"> <span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-info"></i> <i class="icon-bolt text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">Lightweight</h3>
+                            <p>We only choose the lightweight plugins, but with rich functions. we use tiny components, css and js size is first consideration.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wrapper-xl bg-white">
+                        <p class="text-center"> <span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-danger"></i> <i class="icon-html5 text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">HTML5 & CSS3</h3>
+                            <p>This project ues HTML5 and CSS3 to build the components and widgets. the pages use header, nav, section to build the layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 wrapper-xl dk">
+                        <p class="text-center"> <span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-info"></i> <i class="icon-columns text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">App layout</h3>
+                            <p>We create a flexiable layout for your web application -- vertical box(vbox) and horizontal box(hbox). you can use them to build any layout as you want!</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wrapper-xl">
+                        <p class="text-center"> <span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-warning"></i> <i class="icon-dashboard text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">8 color palettes</h3>
+                            <p>We build many components for your project need. also they are extensible and easy to customize. </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wrapper-xl dker">
+                        <p class="text-center"><span class="icon-stack icon-2x"> <i class="icon-circle icon-stack-base text-primary"></i> <i class="icon-lightbulb text-white"></i> </span> </p>
+                        <div>
+                            <h3 class="text-center">Runnable application</h3>
+                            <p>We built two backbone applications for your insperation. they have the create, read, update, delete and search functions. have fun...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-dark clearfix">
+            <div class="container text-center m-xl">
+                <h2 class="font-thin">Thank you for watching!</h2>
+                <p>&nbsp;</p> <a href="#content"><i class="icon-arrow-up"></i><br>Back to top</a> </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="text-center padder clearfix">
+            <p> <small>Mobile first web app framework base on Bootstrap<br>&copy; 2013</small> </p>
+        </div>
+    </footer>
+</body>
 {% endblock content %}
+
+
