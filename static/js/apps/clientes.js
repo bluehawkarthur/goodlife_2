@@ -1,3 +1,5 @@
+
+
 var now = new Date();
       console.log(now);
       $('#id_fecha_ingreso').val(now);

@@ -20,7 +20,7 @@ def RegistrarCliente(request):
   	codigo_dep = dep.short + str(dep.cantidad + 1)
 
 	if request.method == 'POST':
-		form = ClienteForm(request.POST)
+		form = ClienteForm(request.POST, request.FILES)
 		if form.is_valid():
 			print 'entroooooo es validoo jejeje'
 			cliente = Cliente(
@@ -60,7 +60,7 @@ def RegistrarCliente(request):
 
 class ClienteList(PaginationMixin, ListView):
   template_name = 'clientes/lista_cliente.html'
-  paginate_by = 1
+  paginate_by = 5
   model = Cliente
 
   def get_queryset(self):

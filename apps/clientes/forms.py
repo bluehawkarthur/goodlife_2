@@ -54,7 +54,7 @@ class ClienteForm(forms.Form):
 	telefono = forms.IntegerField()
 	cel = forms.IntegerField()
 	foto = forms.ImageField(required=False)
-	activo = forms.BooleanField(initial=False)
+	activo = forms.BooleanField(initial=True)
 	empresa = forms.ModelChoiceField(queryset=Empresa.objects.all())
 	tramite = forms.ModelChoiceField(queryset=Tramite.objects.all())
 	afps = forms.ModelChoiceField(queryset=TramiteAfp.objects.all())

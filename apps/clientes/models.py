@@ -26,7 +26,7 @@ class Cliente(models.Model):
 	telefono = models.IntegerField()
 	cel = models.IntegerField()
 	foto = models.ImageField(upload_to='clientes', null=True, blank=True)
-	activo = models.BooleanField()
+	activo = models.BooleanField(default=True)
 	empresa = models.ForeignKey(Empresa, null=True, blank=True)
 	tramite = models.ForeignKey(Tramite, null=True, blank=True)
 	afps = models.ForeignKey(TramiteAfp, null=True, blank=True)

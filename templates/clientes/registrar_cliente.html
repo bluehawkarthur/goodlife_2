@@ -11,7 +11,7 @@
           </ul>
       </header>
       <section class="scrollable wrapper">
-
+        <div class="panel panel-default">
           <div class="container">
            <div class="row">
             <div class="bootstrap-iso">
@@ -25,123 +25,209 @@
                         {% csrf_token %} 
 
                         <div class="row">
-                          <div class="col-xs-6">
-                            <label class="control-label">Fecha ingreso</label>
-                            <input type="text" class="form-control" id="id_fecha_ingreso3" name="fecha_ingreso3"/>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Fecha ingreso</label>
+                                <input type="text" class="form-control" id="id_fecha_ingreso3" name="fecha_ingreso3"/>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label">{{ form.codigo_gl.label }}</label>
+                                <input type="text" class="form-control" id="id_codigo_gl" value='{{codigo_dep}}' name="codigo_gl"/>
+                            </div>
                           </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.codigo_gl.label }}</label>
-                            <input type="text" class="form-control" id="id_codigo_gl" value='{{codigo_dep}}' name="codigo_gl"/>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.ciudad_origen %} has-error {% endif %}">
-                            <label class="control-label">{{ form.ciudad_origen.label }}</label>
-                            {{form.ciudad_origen|add_class:"form-control"}}
-                            <div class="help-block with-errors">{{form.errors.ciudad_origen|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.nombres %} has-error {% endif %}">
-                            <label class="control-label">{{ form.nombres.label }}</label>
-                            <input type="text" class="form-control" id="id_nombres" name="nombres"/>
-                            <div class="help-block with-errors">{{form.errors.nombres|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.apellidos %} has-error {% endif %}">
-                            <label class="control-label">{{ form.apellidos.label }}</label>
-                            <input type="text" class="form-control" id="id_apellidos" name="apellidos" />
-                            <div class="help-block with-errors">{{form.errors.apellidos|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.edad %} has-error {% endif %}">
-                            <label class="control-label">{{ form.edad.label }}</label>
-                            <input type="number" class="form-control" id="id_edad" name="edad" />
-                            <div class="help-block with-errors">{{form.errors.edad|removetags:'ul li'}}</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-xs-6 {% if form.errors.ci %} has-error {% endif %}">
-                            <label class="control-label">{{ form.ci.label }}</label>
-                            <input type="number" class="form-control" id="id_ci" name="ci" />
-                            <div class="help-block with-errors">{{form.errors.ci|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.telefono %} has-error {% endif %}">
-                            <label class="control-label">{{ form.telefono.label }}</label>
-                            <input type="number" class="form-control" id="id_telefono" name="telefono" />
-                            <div class="help-block with-errors">{{form.errors.telefono|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.cel.label }}</label>
-                            <input type="number" class="form-control" id="id_cel" name="cel"/>
-                          </div>
-                          <div class="col-xs-6">
+                          <div class="col-md-6">
                             <label class="control-label">{{ form.foto.label }}</label>
-                            {{ form.foto|add_class:"form-control" }}
+                              <div class="form-group">
+                                  <div class=" media">
+                                      <div class="bg-light pull-left text-center media-lg thumb-lg">
+                                        
+                                          <img id="image_upload_preview" style="width:110px" src="{% static "images/user.png"%}" alt="your image" />
+                                      </div>
+                                      <div class="media-body">
+                                          <div class="fileinput fileinput-new" data-provides="fileinput">
+                                              <span class="btn btn-default btn-file">
+                                              <span>Buscar Foto</span>
+                                              {{ form.foto }}</span>
+                                              <span class="fileinput-filename">
+                                                
+                                              </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
 
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.activo %} has-error {% endif %}">
-                            <label class="control-label">{{ form.activo.label }}</label>
-                            {{form.activo|add_class:"form-control"}}
-                            <div class="help-block with-errors">{{form.errors.activo|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.empresa %} has-error {% endif %}">
-                            <label class="control-label">{{ form.empresa.label }}</label>
-                            
-                            <div class="help-block with-errors">{{form.errors.empresa|removetags:'ul li'}}</div>
-                            
-                            
-                           
-                            <div class="input-group">
-                              {{ form.empresa|add_class:"form-control" }}
-                              <span class="input-group-btn">
-                                
-                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">+</button>
-                              </span>
-                            </div><!-- /input-group -->
-                          </div>
                         </div>
-                      </div>
 
-                      <div class="form-group">
                         <div class="row">
-                          <div class="col-xs-6 {% if form.errors.tramite %} has-error {% endif %}">
-                            <label class="control-label">{{ form.tramite.label }}</label>
-                            {{ form.tramite|add_class:"form-control" }}
-                            <div class="help-block with-errors">{{form.errors.tramite|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.afps %} has-error {% endif %}">
-                            <label class="control-label">{{ form.afps.label }}</label>
-                            {{ form.afps|add_class:"form-control" }}
-                            <div class="help-block with-errors">{{form.errors.afps|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6 {% if form.errors.clinica %} has-error {% endif %}">
-                            <label class="control-label">{{ form.clinica.label }}</label>
-                            {{ form.clinica|add_class:"form-control" }}
-                            <div class="help-block with-errors">{{form.errors.clinica|removetags:'ul li'}}</div>
-                          </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.persona_referencia.label }}</label>
-                            <input type="text" class="form-control" id="id_persona_referencia" name="persona_referencia" />
-                          </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.telefono_per_referencia.label }}</label>
-                            <input type="number" class="form-control" id="id_telefono_per_referencia" name="telefono_per_referencia" />
-                          </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.cel_per_referencia.label }}</label>
-                            <input type="number" class="form-control" id="id_cel_per_referencia" name="cel_per_referencia" />
-                          </div>
-                          <div class="col-xs-6">
-                            <label class="control-label">{{ form.usuario.label }}</label>
-                            <input type="text" class="form-control" id="id_usuario" name="usuario" />
-                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.ciudad_origen %} has-error {% endif %}">
+                                  <label class="control-label">{{ form.ciudad_origen.label }}</label>
+                                  {{form.ciudad_origen|add_class:"form-control"}}
+                                  <div class="help-block with-errors">
+                                    {{form.errors.ciudad_origen|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.activo %} has-error {% endif %}">
+                                 <label class="control-label">{{ form.activo.label }}</label>
+                                  {{form.activo|add_class:"form-control"}}
+                                  <div class="help-block with-errors">
+                                    {{form.errors.activo|removetags:'ul li'}}
+                                  </div>
+
+                              </div>
+                            </div>
                         </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.nombres %} has-error {% endif %}">
+                                  <label class="control-label">{{ form.nombres.label }}</label>
+                                  <input type="text" class="form-control" id="id_nombres" name="nombres"/>
+                                  <div class="help-block with-errors">
+                                    {{form.errors.nombres|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.apellidos %} has-error {% endif %}">
+                                <label class="control-label">{{ form.apellidos.label }}</label>
+                                <input type="text" class="form-control" id="id_apellidos" name="apellidos" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.apellidos|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.edad %} has-error {% endif %}">
+                                <label class="control-label">{{ form.edad.label }}</label>
+                                <input type="number" class="form-control" id="id_edad" name="edad" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.edad|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.ci %} has-error {% endif %}">
+                                <label class="control-label">{{ form.ci.label }}</label>
+                                <input type="number" class="form-control" id="id_ci" name="ci" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.ci|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.telefono %} has-error {% endif %}">
+                                <label class="control-label">{{ form.telefono.label }}</label>
+                                <input type="number" class="form-control" id="id_telefono" name="telefono" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.telefono|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.cel.label }}</label>
+                                <input type="number" class="form-control" id="id_cel" name="cel"/>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.empresa %} has-error {% endif %}">
+                                <label class="control-label">{{ form.empresa.label }}</label>
+                                
+                                <div class="input-group">
+                                  {{ form.empresa|add_class:"form-control" }}
+
+                                  <span class="input-group-btn">
+                                    
+                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">+</button>
+                                  </span>
+
+                                </div><!-- /input-group -->
+                                <div class="help-block with-errors">{{form.errors.empresa|removetags:'ul li'}}</div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.tramite %} has-error {% endif %}">
+                                <label class="control-label">{{ form.tramite.label }}</label>
+                                {{ form.tramite|add_class:"form-control" }}
+                                <div class="help-block with-errors">
+                                  {{form.errors.tramite|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.afps %} has-error {% endif %}">
+                                <label class="control-label">{{ form.afps.label }}</label>
+                                {{ form.afps|add_class:"form-control" }}
+                                <div class="help-block with-errors">
+                                  {{form.errors.afps|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.clinica %} has-error {% endif %}">
+                                <label class="control-label">{{ form.clinica.label }}</label>
+                                {{ form.clinica|add_class:"form-control" }}
+                                <div class="help-block with-errors">
+                                  {{form.errors.clinica|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.persona_referencia.label }}</label>
+                                <input type="text" class="form-control" id="id_persona_referencia" name="persona_referencia" />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.telefono_per_referencia.label }}</label>
+                                <input type="number" class="form-control" id="id_telefono_per_referencia" name="telefono_per_referencia" />
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.cel_per_referencia.label }}</label>
+                                <input type="number" class="form-control" id="id_cel_per_referencia" name="cel_per_referencia" />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.usuario.label }}</label>
+                                <input type="text" class="form-control" id="id_usuario" name="usuario" />
+                              </div>
+                            </div>
+                        </div>
+
                       </div>
 
                       <div class="form-group">
                         <div>
                           <button class="btn btn-primary " name="submit" type="submit">
-                            Submit
+                            Guardar
                           </button>
-                          <a href="/listar_cliente" class="btn btn-lg btn-warning"><i class="left"></i> Volver  Atras</a>
+                          <a href="/listar_cliente" class="btn  btn-success"><i class="left"></i> Volver  Atras</a>
                         </div>
                       </div>
                     </form>
@@ -239,6 +325,7 @@
               </div>
             </div>
           </div>
+        </div>
       </section>
   </section>      
 </section>
@@ -248,7 +335,26 @@
     {% load staticfiles %}
     <script src="{% static "js/apps/clientes.js"%}"></script>
     <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                console.log(reader);
+                reader.onload = function (e) {
+                    $('#image_upload_preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
       
+     
+       $("#id_foto").change(function () {
+            console.log('jhjhjhhj');
+
+            $("#image_upload_preview").prop("hidden", false);
+            readURL(this);
+        });
 
     </script>
   {% endblock js %}
