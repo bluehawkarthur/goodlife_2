@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static "css/font-awesome.css"%}">
     <script src="{% static "js/jquery.min.js"%}"></script>
     <script src="{% static "js/app.v1.js"%}"></script>
-    <script src="{% static "js/bootstrap.js"%}"></script>
+
     <script src="{% static "js/jquery.validate.js"%}"></script>
     
     <!--[if lt IE 9]> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/html5.js" cache="false"></script> <script src="js/ie/fix.js" cache="false"></script> <![endif]-->
@@ -24,7 +24,7 @@
         <aside class="bg-primary aside-sm" id="nav">
             <section class="vbox">
                 <header class="dker nav-bar">
-                    <a class="btn btn-link visible-xs" > <i class="icon-reorder"></i> </a> <a href="/" class="nav-brand" >Good Life</a>
+                    <a class="btn btn-link visible-xs active" data-toggle="class:nav-off-screen" data-target="body"> <i class="icon-reorder"></i> </a> <a href="/" class="nav-brand" >Good Life</a>
                     <a class="btn btn-link visible-xs" data-toggle="class:show" data-target=".nav-user"> <i class="icon-comment-alt"></i> </a>
                 </header>
                 <footer class="footer bg-gradient hidden-xs">

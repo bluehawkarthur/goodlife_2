@@ -1,10 +1,11 @@
 from django.shortcuts import render, render_to_response
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from .models import Cliente, DtoCodigo
 from apps.empresas.models import Empresa
+from apps.clinicas.models import Clinica
 from .forms import ClienteForm
 import json
 
@@ -12,50 +13,51 @@ from datetime import date
 from django.db.models import Q
 import operator
 from pure_pagination.mixins import PaginationMixin
+from htmltopdf import render_to_pdf
 
 
 def RegistrarCliente(request):
-	departamento = 'Cochabamba'
-  	dep = DtoCodigo.objects.get(departamento=departamento)
-  	codigo_dep = dep.short + str(dep.cantidad + 1)
+  departamento = 'Cochabamba'
+  dep = DtoCodigo.objects.get(departamento=departamento)
+  codigo_dep = dep.short + str(dep.cantidad + 1)
 
-	if request.method == 'POST':
-		form = ClienteForm(request.POST, request.FILES)
-		if form.is_valid():
-			print 'entroooooo es validoo jejeje'
-			cliente = Cliente(
-				codigo_gl = form.cleaned_data['codigo_gl'],
-				fecha_ingreso = date.today(),
-				ciudad_origen = form.cleaned_data['ciudad_origen'],
-				nombres = form.cleaned_data['nombres'],
-				apellidos = form.cleaned_data['apellidos'],
-				edad = form.cleaned_data['edad'],
-				ci = form.cleaned_data['ci'],
-				telefono = form.cleaned_data['telefono'],
-				cel = form.cleaned_data['cel'],
-				foto = form.cleaned_data['foto'],
-				activo = form.cleaned_data['activo'],
-				empresa = form.cleaned_data['empresa'],
-				tramite = form.cleaned_data['tramite'],
-				afps = form.cleaned_data['afps'],
-				clinica = form.cleaned_data['clinica'],
-				persona_referencia = form.cleaned_data['persona_referencia'],
-				telefono_per_referencia = form.cleaned_data['telefono_per_referencia'],
-				cel_per_referencia = form.cleaned_data['cel_per_referencia'],
-				usuario = form.cleaned_data['usuario'])
-			cliente.save()
+  if request.method == 'POST':
+    form = ClienteForm(request.POST, request.FILES)
+    if form.is_valid():
+      print 'entroooooo es validoo jejeje'
+      cliente = Cliente(
+        codigo_gl=form.cleaned_data['codigo_gl'],
+        fecha_ingreso=date.today(),
+        ciudad_origen=form.cleaned_data['ciudad_origen'],
+        nombres=form.cleaned_data['nombres'],
+        apellidos=form.cleaned_data['apellidos'],
+        edad=form.cleaned_data['edad'],
+        ci=form.cleaned_data['ci'],
+        telefono=form.cleaned_data['telefono'],
+        cel=form.cleaned_data['cel'],
+        foto=form.cleaned_data['foto'],
+        activo=form.cleaned_data['activo'],
+        empresa=form.cleaned_data['empresa'],
+        tramite=form.cleaned_data['tramite'],
+        afps=form.cleaned_data['afps'],
+        clinica=form.cleaned_data['clinica'],
+        persona_referencia=form.cleaned_data['persona_referencia'],
+        telefono_per_referencia=form.cleaned_data['telefono_per_referencia'],
+        cel_per_referencia=form.cleaned_data['cel_per_referencia'],
+        fecha_inactivo=form.cleaned_data['fecha_inactivo'])
+      cliente.save()
 
-			codigod = DtoCodigo.objects.filter(id=dep.pk)
-			codigod.update(cantidad=codigod[0].cantidad + 1)
+      codigod = DtoCodigo.objects.filter(id=dep.pk)
+      codigod.update(cantidad=codigod[0].cantidad + 1)
 
-			return HttpResponseRedirect(reverse_lazy('listar_cliente'))
+      return HttpResponseRedirect(reverse('detallecliente', args=(cliente.pk,)))
+
 			# return render_to_response('config/crearSucursal.html')
-	else:
-		print 'entro normalaaaaaaaa'
-		
-		form = ClienteForm()
-	variables = RequestContext(request, {'form': form, 'codigo_dep': codigo_dep})
-	return render_to_response('clientes/registrar_cliente.html', variables)
+  else:
+    print 'entro normalaaaaaaaa'
+    form = ClienteForm()
+  variables = RequestContext(request, {'form': form, 'codigo_dep': codigo_dep})
+  return render_to_response('clientes/registrar_cliente.html', variables)
 
 
 class ClienteList(PaginationMixin, ListView):
@@ -96,7 +98,7 @@ class ClienteUpdate(UpdateView):
   model = Cliente
   fields = ('codigo_gl', 'fecha_ingreso', 'ciudad_origen', 'nombres', 'apellidos', 'edad', 'ci', 'telefono', 'cel',
     'foto', 'activo', 'empresa', 'tramite', 'afps', 'clinica', 'persona_referencia', 'telefono_per_referencia',
-    'cel_per_referencia', 'usuario')
+    'cel_per_referencia', 'fecha_inactivo')
   success_url = reverse_lazy('listar_cliente')
 
 
@@ -123,3 +125,23 @@ def addEmpresa(request):
     data = {'pk': empresa.pk, 'razon_socialemp': empresa.razon_social}
     print 'guardoooooooo'
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+def addClinica(request):
+  if request.method == 'POST':
+    print 'llegoooo aaaaquiiii'
+    print request.POST['telefono1']
+    clinica = Clinica(
+      razon_social=request.POST['razon_social'],
+      direccion=request.POST['direccion'],
+      telefono1=request.POST['telefono1'],
+      telefono2=request.POST['telefono2'])
+    clinica.save()
+    data = {'pk': clinica.pk, 'razon_socialclinica': clinica.razon_social}
+    print 'guardoooooooo'
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def detalleCliente(request, pk):
+    detalle = Cliente.objects.get(id=pk)
+
+    return render_to_pdf('clientes/clientepdf.html', {'detalle': detalle})

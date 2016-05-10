@@ -52,17 +52,17 @@ class ClienteForm(forms.Form):
 	edad = forms.IntegerField()
 	ci = forms.IntegerField()
 	telefono = forms.IntegerField()
-	cel = forms.IntegerField()
+	cel = forms.IntegerField(required=False)
 	foto = forms.ImageField(required=False)
-	activo = forms.BooleanField(initial=True)
+	activo = forms.BooleanField(initial=True, required=False)
 	empresa = forms.ModelChoiceField(queryset=Empresa.objects.all())
 	tramite = forms.ModelChoiceField(queryset=Tramite.objects.all())
 	afps = forms.ModelChoiceField(queryset=TramiteAfp.objects.all())
 	clinica = forms.ModelChoiceField(queryset=Clinica.objects.all())
-	persona_referencia = forms.CharField()
-	telefono_per_referencia = forms.IntegerField()
-	cel_per_referencia = forms.IntegerField()
-	usuario = forms.CharField()
-
+	persona_referencia = forms.CharField(required=False)
+	telefono_per_referencia = forms.IntegerField(required=False)
+	cel_per_referencia = forms.IntegerField(required=False)
+	fecha_inactivo = forms.DateField(required=False)
+	
 	# class Meta:
 	# 	model = Cliente

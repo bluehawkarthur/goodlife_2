@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+  <style>
+   .center-text{
+    text-align:center;
+   }
+   .text-size{
+    font-size: 10px;
+
+   }
+   
+  </style>
+</head>
+<body>
+  
+
+
+
+
+
+
+
+<section id="content">
+        <!--start container-->
+        <div class="container">
+          <div id="invoice">
+          
+            </div>
+            <div class="invoice-table">
+              <div class="row">
+                <div class="col s12 m12 l12">
+
+          
+          <table style="border:1px solid black;" class="text-size">
+          <thead>
+            <tr style="border-botton:1px;padding: 2px;" >
+              <th data-field="item">CODIGO</th>
+              <th data-field="item">NOMBRE COMPLETO</th>
+              <th data-field="item">INSTITUCION</th>
+              <th data-field="item">TELEFONO</th>
+              <th data-field="uprice">PERSONA DE REFERENCIA</th>
+              <th data-field="uprice">TELEFONO DE PERSONA DE REFERENCIA</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr style="padding: 5px;">
+              <td >{{detalle.codigo_gl}}</td>
+              <td >{{detalle.nombres}} {{detalle.apellidos}}</td>
+              <td >{{detalle.empresa}}</td>
+              <td >{{detalle.telefono}}</td>
+              <td >{{detalle.persona_referencia}}</td>
+              <td >{{detalle.telefono_per_referencia}}</td>
+              
+            </tr>
+           
+            
+          </tbody>
+          </table>
+          <table style="border:1px solid black;" class="text-size">
+          <thead>
+            <tr style="border-botton:1px;padding: 5px;" >
+              <th data-field="item">CIUDAD</th>
+              <th data-field="item">TRAMITE</th>
+              <th data-field="item">CI</th>
+              <th data-field="item">FECHA DE INGRESO</th>
+              <th data-field="uprice">CLINICA</th>
+              <th data-field="uprice">AFP</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr style="border-botton:1px;padding: 5px;">
+              <td>{{detalle.ciudad_origen}}</td>
+              <td>{{detalle.tramite}}</td>
+              <td>{{detalle.ci}}</td>
+              <td>{{detalle.fecha_ingreso}}</td>
+              <td>{{detalle.clinica}}</td>
+              <td>{{detalle.afps}}</td>
+            </tr>
+           
+          </tbody>
+          </table>
+                </div>
+                
+              </div>
+            </div>
+         
+            
+          </div>
+        </div>
+        <!--end container-->
+</section>
+
+
+
+</body>
+</html>

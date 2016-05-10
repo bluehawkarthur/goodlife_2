@@ -1,129 +1,453 @@
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 {% load staticfiles %}
 
 {% block content %}
 {% load widget_tweaks %}
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#static" data-toggle="tab">Editar Cliente</a></li>
+          </ul>
+      </header>
+      <section class="scrollable wrapper">
+        <div class="panel panel-default">
+          <div class="container">
+           <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
 
+                  <div class="form-group">
+                    <form class=""  method="POST" enctype='multipart/form-data' id="formcliente">
+                      <div class="card-panel">
+                        <h3 class="header2">Editar Cliente</h3>
+                        {% csrf_token %} 
 
-<div class="container">
-  <div class="row">
-    <form class=""  method="POST" enctype='multipart/form-data'>
-      <div class="card-panel">
-        <h3 class="header2">Registrar Cliente</h3>
-          {% csrf_token %} 
-          
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Fecha ingreso</label>
+                                
+                                <input type="text" class="form-control" id="id_fecha_ingreso3" name="fecha_ingreso3"/>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label">{{ form.codigo_gl.label }}</label>
+                                
+                                {{form.codigo_gl|add_class:"form-control"}}
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="control-label">{{ form.foto.label }}</label>
+                              <div class="form-group">
+                                  <div class=" media">
+                                      <div class="bg-light pull-left text-center media-lg thumb-lg">
+                                        {% if form.foto.value %}
+                                          <img id="image_upload_preview" style="width:110px" src="{{form.foto.value.url}}" alt="your image" />
+                                        {% else %}
+                                          <img id="image_upload_preview" style="width:110px" src="{% static "images/user.png"%}" alt="your image" />
+                                        {% endif %}
+                                      </div>
+                                      <div class="media-body">
+                                          <div class="fileinput fileinput-new" data-provides="fileinput">
+                                              <span class="btn btn-default btn-file">
+                                              <span>Buscar Foto</span>
+                                              <input type="file" name="foto" id="id_foto"></span>
+                                              <span class="fileinput-filename">
+                                                
+                                              </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
 
-    <div class="bootstrap-iso">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-8 col-sm-8 col-xs-12">
-            <form method="post">
+                        </div>
 
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.fecha_ingreso.label }}</label>
-                    {{ form.fecha_ingreso|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.codigo_gl.label }}</label>
-                    {{ form.codigo_gl|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.ciudad_origen.label }}</label>
-                     {{ form.ciudad_origen|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.nombres.label }}</label>
-                     {{ form.nombres|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.apellidos.label }}</label>
-                     {{ form.apellidos|add_class:"form-control" }}
-                  </div>
-                   <div class="col-xs-6">
-                    <label class="control-label">{{ form.edad.label }}</label>
-                     {{ form.edad|add_class:"form-control" }}
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.ciudad_origen %} has-error {% endif %}">
+                                  <label class="control-label">{{ form.ciudad_origen.label }}</label>
+                                  {{form.ciudad_origen|add_class:"form-control"}}
+                                  <div class="help-block with-errors">
+                                    {{form.errors.ciudad_origen|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+
+                              <div class="form-group {% if form.errors.activo %} has-error {% endif %}">
+                                 <label class="control-label"></label>
+                                  
+                                  
+                                  <div class="checkbox checkbox-primary">
+                      
+                                      {{form.activo|attr:"id:checkbox2"}}
+                                      <label for="checkbox2">
+                                          {{ form.activo.label }}
+                                      </label>
+                                  </div>
+                                  <div class="help-block with-errors">
+                                    {{form.errors.activo|removetags:'ul li'}}
+                                  </div>
+
+                                  {{form.fecha_inactivo|add_class:"form-control datepicker"|attr:"data-date-format:yyyy-mm-dd"}}
+
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.nombres %} has-error {% endif %}">
+                                  <label class="control-label">{{ form.nombres.label }}</label>
+                                  {{form.nombres|add_class:"form-control"}}
+                                  <div class="help-block with-errors">
+                                    {{form.errors.nombres|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.apellidos %} has-error {% endif %}">
+                                <label class="control-label">{{ form.apellidos.label }}</label>
+                                {{form.apellidos|add_class:"form-control"}}
+                                <div class="help-block with-errors">
+                                  {{form.errors.apellidos|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.edad %} has-error {% endif %}">
+                                <label class="control-label">{{ form.edad.label }}</label>
+                                {{form.edad|add_class:"form-control"}}
+                                <div class="help-block with-errors">
+                                  {{form.errors.edad|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.ci %} has-error {% endif %}">
+                                <label class="control-label">{{ form.ci.label }}</label>
+                                {{form.ci|add_class:"form-control"}}
+                                <div class="help-block with-errors">
+                                  {{form.errors.ci|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.telefono %} has-error {% endif %}">
+                                <label class="control-label">{{ form.telefono.label }}</label>
+                                {{form.telefono|add_class:"form-control"}}
+                                <div class="help-block with-errors">
+                                  {{form.errors.telefono|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.cel.label }}</label>
+                                {{form.cel|add_class:"form-control"}}
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.empresa %} has-error {% endif %}">
+                                <label class="control-label">{{ form.empresa.label }}</label>
+                                
+                                <div class="input-group">
+                                  {{ form.empresa|add_class:"form-control" }}
+
+                                  <span class="input-group-btn">
+                                    
+                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#myModal" data-backdrop="static">+</button>
+                                  </span>
+
+                                </div><!-- /input-group -->
+                                <div class="help-block with-errors">{{form.errors.empresa|removetags:'ul li'}}</div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.tramite %} has-error {% endif %}">
+                                <label class="control-label">{{ form.tramite.label }}</label>
+                                {{ form.tramite|add_class:"form-control" }}
+                                <div class="help-block with-errors">
+                                  {{form.errors.tramite|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.afps %} has-error {% endif %}">
+                                <label class="control-label">{{ form.afps.label }}</label>
+                                {{ form.afps|add_class:"form-control" }}
+                                <div class="help-block with-errors">
+                                  {{form.errors.afps|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.clinica %} has-error {% endif %}">
+                                <label class="control-label">{{ form.clinica.label }}</label>
+
+                                <div class="input-group">
+                                  {{ form.clinica|add_class:"form-control" }}
+                                  <span class="input-group-btn">
+                                    
+                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#Modalclinica" data-backdrop="static">+</button>
+                                  </span>
+
+                                </div><!-- /input-group -->
+                                <div class="help-block with-errors">{{form.errors.clinica|removetags:'ul li'}}</div>
+
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.persona_referencia.label }}</label>
+                                {{form.persona_referencia|add_class:"form-control"}}
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.telefono_per_referencia.label }}</label>
+                                {{form.telefono_per_referencia|add_class:"form-control"}}
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.cel_per_referencia.label }}</label>
+                                {{form.cel_per_referencia|add_class:"form-control"}}
+                              </div>
+                            </div>
+                            
+                        </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <div>
+                          <button class="btn btn-primary " id="save"  type="submit">
+                            Guardar
+                          </button>
+                          <a href="/listar_cliente" class="btn  btn-success"><i class="left"></i> Volver  Atras</a>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.ci.label }}</label>
-                     {{ form.ci|add_class:"form-control" }}
+            <!-- Modal empresa-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close cancel" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registro de empresa</h4>
                   </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.telefono.label }}</label>
-                     {{ form.telefono|add_class:"form-control" }}
+                  <div class="modal-body">
+                    <form id="form2" method="POST">
+                     
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Razon Social:</label>
+                                <input class="form-control" type='text' name='razon_social'>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Direccion:</label>
+                                <input type="text" class="form-control" id="" name='direccion'>
+                            </div>
+                          </div>
+
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Telefono 1:</label>
+                                <input type="number" class="form-control" id="" name='telefono1'>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Telefono 2:</label>
+                                <input type="number" class="form-control" id="" name='telefono2'>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Departamento:</label>
+                                <select name="departamento" id="parent_selection" class="form-control">
+                                      <option value="">Seleccione el departamento</option>
+                                      <option value="Beni">Beni</option>
+                                      <option value="Chuquisaca">Chuquisaca</option>
+                                      <option value="Cochabamba">Cochabamba</option>
+                                      <option value="La Paz">La Paz</option>
+                                      <option value="Oruro">Oruro</option>
+                                      <option value="Pando">Pando</option>
+                                      <option value="Potosi">Potosi</option>
+                                      <option value="Santa Cruz">Santa Cruz</option>
+                                      <option value="Tarija">Tarija</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Municipio:</label>
+                                <select name="municipios" id="child_selection" class="form-control">
+                                    <option value="">Seleccione el municipio</option>
+                                </select>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Nro Patronal:</label>
+                                <input type="number" class="form-control" id="" name='nro_patronal'>
+                            </div>
+                          </div>
+                          
+                      </div>       
                   </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.cel.label }}</label>
-                     {{ form.cel|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.foto.label }}</label>
-                     {{ form.foto|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.activo.label }}</label>
-                     {{ form.activo|add_class:"form-control" }}
-                  </div>
-                   <div class="col-xs-6">
-                    <label class="control-label">{{ form.empresa.label }}</label>
-                     {{ form.empresa|add_class:"form-control" }}
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default cancel" id="cancel" data-dismiss="modal">Cerrar</button>
+                    <button id="register" type="button" class="btn btn-primary">Guardar</button>
+                    </form>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.tramite.label }}</label>
-                     {{ form.tramite|add_class:"form-control" }}
+
+            <!-- Modal clinica -->
+            <div class="modal fade" id="Modalclinica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close cancel-clinica" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registro de clinica</h4>
                   </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.afps.label }}</label>
-                     {{ form.afps|add_class:"form-control" }}
+                  <div class="modal-body">
+                    <form id="formclinica" method="POST">
+                     
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Razon Social:</label>
+                                <input class="form-control" type='text' name='razon_social'>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Direccion:</label>
+                                <input type="text" class="form-control" id="" name='direccion'>
+                            </div>
+                          </div>
+
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Telefono 1:</label>
+                                <input type="number" class="form-control" id="" name='telefono1'>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Telefono 2:</label>
+                                <input type="number" class="form-control" id="" name='telefono2'>
+                            </div>
+                          </div>
+                      </div>      
                   </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.clinica.label }}</label>
-                     {{ form.clinica|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.persona_referencia.label }}</label>
-                     {{ form.persona_referencia|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.telefono_per_referencia.label }}</label>
-                     {{ form.telefono_per_referencia|add_class:"form-control" }}
-                  </div>
-                   <div class="col-xs-6">
-                    <label class="control-label">{{ form.cel_per_referencia.label }}</label>
-                     {{ form.cel_per_referencia|add_class:"form-control" }}
-                  </div>
-                  <div class="col-xs-6">
-                    <label class="control-label">{{ form.usuario.label }}</label>
-                     {{ form.usuario|add_class:"form-control" }}
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default cancel-clinica" id="cancel" data-dismiss="modal">Cerrar</button>
+                    <button id="register-clinica" type="button" class="btn btn-primary">Guardar</button>
+                    </form>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="form-group">
-                <div>
-                  <button class="btn btn-primary " name="submit" type="submit">
-                    Submit
-                  </button>
-                   <a href="/listar_cliente" class="btn btn-lg btn-warning"><i class="left"></i> Volver  Atras</a>
-                </div>
-              </div>
 
-            </form>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+  </section>      
+</section>
+    {% endblock %}
 
-{% endblock %}
+    {% block js %}
+    {% load staticfiles %}
+    <script src="{% static "js/apps/clientes.js"%}"></script>
+    <script>
+    // para renderizar en un img la imagen q se va subir
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                console.log(reader);
+                reader.onload = function (e) {
+                    $('#image_upload_preview').attr('src', e.target.result);
+                }
 
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+      
+     
+       $("#id_foto").change(function () {
+            $("#image_upload_preview").prop("hidden", false);
+            readURL(this);
+        });
+    // para la accion del checkbox de activo
+
+      if ($("#checkbox2").is(':checked')){
+               
+        $("#id_fecha_inactivo").hide();
+      }else{
+        $("#id_fecha_inactivo").show();
+        
+      }
+
+
+      $("#checkbox2").change(function(){
+        var dato = $(this).val();
+        console.log(dato);
+        if ($(this).is(':checked')){
+               
+          $("#id_fecha_inactivo").hide();
+        }else{
+          $("#formcliente").valid();
+          $("#id_fecha_inactivo").show();
+          $("#id_fecha_inactivo").val('');
+        }
+      }); 
+
+    </script>
+  {% endblock js %}

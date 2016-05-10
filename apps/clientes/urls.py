@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^update_cliente/(?P<pk>\d+)$', ClienteUpdate.as_view(), name='cliente_update'),
     url(r'^delete_cliente/(?P<id>\d+)$', 'apps.clientes.views.eliminarCliente', name='cliente_delete'),
     url(r'^registrar_emp/$', 'apps.clientes.views.addEmpresa', name='registrar_empresa'),
-    
+    url(r'^registrar_clinic/$', 'apps.clientes.views.addClinica', name='registrar_clinic'),
+    url(r'^detalle_cliente/(?P<pk>\d+)$', 'apps.clientes.views.detalleCliente', name='detallecliente'),
 
 ]

@@ -1,86 +1,103 @@
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
-	
-<div class="container">
-    <h1 class="text-center">Detalle de Cliente Good Life</h1>
-    <form class="form-horizontal" method='POST'>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Ciudad de origen:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.ciudad_origen}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Codigo GL:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.codigo_gl}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Fecha de Ingreso:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.fecha_ingreso}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Nombres:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.nombres}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Apellidos:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.apellidos}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">CI:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.ci}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.telefono}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Cel:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.cel}}</p>
-            </div>
-          </div><!-- End form-group  -->
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Empresa:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.empresa}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Tramite:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.tramite}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">AFP:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.afps}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Clinica:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.clinica}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Persona de referencia:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.persona_referencia}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono de referencia:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.telefono_per_referencia}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Cel de referencia:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.cel_per_referencia}}</p>
-            </div>
-          </div><!-- End form-group  -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <a href="/listar_cliente/" class="btn btn-lg btn-block btn-warning">Volver</a>
-        </div>
-      </div>
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#static" data-toggle="tab">Detalle Cliente</a></li>
+          </ul>
+      </header>
+      <section class="scrollable wrapper">
+        <div class="panel panel-default">
+          <div class="container">
+            <div class="row">
+              <h1 class="text-center">Detalle de Cliente Good Life</h1>
+              <form class="form-horizontal" method='POST'>
+            
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" class="col-sm-5 control-label2">Ciudad de origen:</label>
+                      <div class="col-sm-10">
+                      <p class="form-control">{{object.ciudad_origen}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Codigo GL:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.codigo_gl}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Fecha de Ingreso:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.fecha_ingreso}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Nombres:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.nombres}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Apellidos:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.apellidos}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">CI:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.ci}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Telefono:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.telefono}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Cel:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.cel}}</p>
+                      </div>
+                    </div><!-- End form-group  -->
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" class="col-sm-5 control-label2">Empresa:</label>
+                      <div class="col-sm-10">
+                      <p class="form-control">{{object.empresa}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Tramite:</label>
+                      <div class="col-sm-10">
+                      <p class="form-control">{{object.tramite}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">AFP:</label>
+                      <div class="col-sm-10">
+                      <p class="form-control">{{object.afps}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Clinica:</label>
+                      <div class="col-sm-10">
+                      <p class="form-control">{{object.clinica}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Persona de referencia:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.persona_referencia}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Telefono de referencia:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.telefono_per_referencia}}</p>
+                      </div>
+                      <label for="" class="col-sm-5 control-label2">Cel de referencia:</label>
+                      <div class="col-sm-10">
+                        <p class="form-control">{{object.cel_per_referencia}}</p>
+                      </div>
+                    </div><!-- End form-group  -->
+                  </div>
+                
+                
 
-      </form>
-  </div>
+                </form>
+              </div>
+              <div class="form-group">
+                        <div>
+                         
+                          <a href="/listar_cliente" class="btn  btn-success"><i class="left"></i> Volver  Atras</a>
+                        </div>
+                      </div>
+               
+            </div>
+          </div>
+      </section>
+  </section>      
+</section>
 {% endblock content %}
