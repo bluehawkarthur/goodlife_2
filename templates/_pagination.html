@@ -3,12 +3,10 @@
 
 <footer class="panel-footer">
     <div class="row">
-        <div class="col-sm-4 hidden-xs">
-            
-        </div>
+        
         <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">pagina {{page_obj.number}}-{{page_obj.pages|length}} de {{object_list.count}} items  </small> </div>
 
-        <div class="col-sm-4 text-right text-center-xs">
+        <div class="col-sm-8 text-right text-center-xs">
             <ul class="pagination pagination-sm m-t-none m-b-none">
                 {% if page_obj.has_previous %}
                     <li class="prev"><a class="num" href="?{{ page_obj.previous_page_number.querystring }}"><i class="icon-chevron-left"></i></a></li>

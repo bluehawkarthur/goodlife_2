@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, TemplateView
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -14,6 +14,9 @@ from django.db.models import Q
 import operator
 from pure_pagination.mixins import PaginationMixin
 from htmltopdf import render_to_pdf
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+import base64
 
 
 def RegistrarCliente(request):
@@ -25,6 +28,21 @@ def RegistrarCliente(request):
     form = ClienteForm(request.POST, request.FILES)
     if form.is_valid():
       print 'entroooooo es validoo jejeje'
+      print form.cleaned_data['foto']
+
+      if form.cleaned_data['foto']:
+      	foto1 = form.cleaned_data['foto']
+      else:
+      	if form.cleaned_data['imagenf']:
+      		foto1 = 'clientes/'+ form.cleaned_data['codigo_gl'] + ".jpg"
+      		fotoname = form.cleaned_data['codigo_gl'] + ".jpg"
+      		imagen = base64.b64decode(form.cleaned_data['imagenf'])
+      		f = open(settings.MEDIA_ROOT + '/clientes/'+ fotoname, 'wb')
+      		f.write(imagen)
+      		f.close()
+      	else:
+      			foto1 = foto1 = form.cleaned_data['foto']
+
       cliente = Cliente(
         codigo_gl=form.cleaned_data['codigo_gl'],
         fecha_ingreso=date.today(),
@@ -35,7 +53,7 @@ def RegistrarCliente(request):
         ci=form.cleaned_data['ci'],
         telefono=form.cleaned_data['telefono'],
         cel=form.cleaned_data['cel'],
-        foto=form.cleaned_data['foto'],
+        foto=foto1,
         activo=form.cleaned_data['activo'],
         empresa=form.cleaned_data['empresa'],
         tramite=form.cleaned_data['tramite'],
@@ -62,7 +80,7 @@ def RegistrarCliente(request):
 
 class ClienteList(PaginationMixin, ListView):
   template_name = 'clientes/lista_cliente.html'
-  paginate_by = 5
+  paginate_by = 10
   model = Cliente
 
   def get_queryset(self):
@@ -145,3 +163,33 @@ def detalleCliente(request, pk):
     detalle = Cliente.objects.get(id=pk)
 
     return render_to_pdf('clientes/clientepdf.html', {'detalle': detalle})
+
+
+# @csrf_exempt
+# def SaveImage(request, codigo):
+#     print codigo
+#     print 'entrooo a save'
+
+#     return HttpResponse('http://localhost:8080/site_media/webcamimages/someimage.jpg')
+
+
+
+class SaveImage(TemplateView):
+
+  @csrf_exempt
+  def dispatch(self, *args, **kwargs):
+		self.filename = self.kwargs['codigo']+'.jpg'
+		return super(SaveImage, self).dispatch(*args, **kwargs)
+  
+  def post(self, request, *args, **kwargs):
+		
+		imagen = base64.b64decode('')
+		# save it somewhere
+		f = open(settings.MEDIA_ROOT + '/clientes/'+ self.filename, 'wb')
+		f.write(imagen)
+		f.close()
+		# return the URL
+		return HttpResponse("/media/clientes/" + self.filename)
+
+  def get(self, request, *args, **kwargs):
+		return HttpResponse('No esta pasando el POST')

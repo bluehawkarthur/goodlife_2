@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from .views import RegistrarCliente, ClienteList, ClienteDetail, ClienteUpdate
+from .views import ClienteList, ClienteDetail, ClienteUpdate, SaveImage
 
 urlpatterns = [
     url(r'^registrar_cliente/$', 'apps.clientes.views.RegistrarCliente', name='registrar_cliente'),
@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^registrar_emp/$', 'apps.clientes.views.addEmpresa', name='registrar_empresa'),
     url(r'^registrar_clinic/$', 'apps.clientes.views.addClinica', name='registrar_clinic'),
     url(r'^detalle_cliente/(?P<pk>\d+)$', 'apps.clientes.views.detalleCliente', name='detallecliente'),
-
+    url(r'^save_image/(?P<codigo>[\w\-]+)/$', SaveImage.as_view(), name='salvar_imagen'),
+    # url(r'^save_image/(?P<codigo>[\w\-]+)$', 'apps.clientes.views.SaveImage', name='salvar_imagen'),
 ]

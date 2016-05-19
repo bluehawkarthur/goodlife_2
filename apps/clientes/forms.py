@@ -51,7 +51,7 @@ class ClienteForm(forms.Form):
 	apellidos = forms.CharField()
 	edad = forms.IntegerField()
 	ci = forms.IntegerField()
-	telefono = forms.IntegerField()
+	telefono = forms.IntegerField(required=False)
 	cel = forms.IntegerField(required=False)
 	foto = forms.ImageField(required=False)
 	activo = forms.BooleanField(initial=True, required=False)
@@ -63,6 +63,8 @@ class ClienteForm(forms.Form):
 	telefono_per_referencia = forms.IntegerField(required=False)
 	cel_per_referencia = forms.IntegerField(required=False)
 	fecha_inactivo = forms.DateField(required=False)
+	seguro = forms.CharField(required=False)
+	imagenf = forms.CharField(required=False)
 	
 	# class Meta:
 	# 	model = Cliente

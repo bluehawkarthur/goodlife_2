@@ -1,42 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container">
-	<div class="panel panel-default">
-<!-- Default panel contents -->
-		<div class="panel-heading"><h3 class='fixh3'>Lista de Empresas:</h3>
-			<a href="/registrar_empresa/"><button type="button" class="btn btn-success pull-right fixbutcrear">Crear Empresa</button>
-			</a>
-		</div>
+	
+	<div class="container">
 		<div class="row">
-			<div class="col-xs-12">
-		    	<div class="table-responsive">
-			        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
-			          <thead>
-			            <tr>
-			            	<th>Empresa</th>
-							<th>Detalle</th>
-							<th>Modificar</th>
-							<th>Eliminar</th>
-			            </tr>
-				        </thead>
-							<tbody>
-						{% for object in object_list %}
-							<tr>
-								<td>{{object}}</td>
-								<td><a href="/detail_empresa/{{object.id}}">Ver</a></td>
-								<td><a href="/update_empresa/{{object.id}}">Editar</a></td>
-								<td><a href="/delete_empresa/{{object.id}}">Delete</a></td>
-							</tr>
-						{% endfor %}
-						</tbody>
-			        </table>
-		    	</div><!--end of .table-responsive-->
-		    </div>
-		</div>
-	</div>	
-</div>
+			<div class="panel panel-default">
+	<!-- Default panel contents -->
+	<div class="panel-heading"><h3 class='fixh3'>Lista de Empresas:</h3>
+		<a href="/registrar_empresa/"><button type="button" class="btn btn-success pull-right fixbutcrear">Crear Empresa</button>
+	</a>
+	</div>
+	<!-- Table -->
+		<table class="table">
+			<thead>
+				<th>Empresa</th>
+				<th>Detalle</th>
+				<th>Modificar</th>
+				<th>Eliminar</th>
+			</thead>
+			<tbody>
+			{% for object in object_list %}
+				<tr>
+					<td>{{object}}</td>
+					<td><a href="/detail_empresa/{{object.id}}">Ver</a></td>
+					<td><a href="/update_empresa/{{object.id}}">Editar</a></td>
+					<td><a href="/delete_empresa/{{object.id}}">Delete</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
+		</div>
+	</div>
 	
 {% endblock content %}	

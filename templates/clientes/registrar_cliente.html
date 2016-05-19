@@ -39,17 +39,20 @@
                                   <div class=" media">
                                       <div class="bg-light pull-left text-center media-lg thumb-lg">
                                         
-                                          <img id="image_upload_preview" style="width:110px" src="{% static "images/user.png"%}" alt="your image" />
+                                          <img id="image_upload_preview" style="width:150px" src="{% static "images/user.png"%}" alt="your image" />
                                       </div>
                                       <div class="media-body">
                                           <div class="fileinput fileinput-new" data-provides="fileinput">
                                               <span class="btn btn-default btn-file">
                                               <span>Buscar Foto</span>
                                               {{ form.foto }}</span>
+                                              <input id="imagenf" type="hidden" name="imagenf" value=""/>
                                               <span class="fileinput-filename">
                                                 
                                               </span>
                                           </div>
+                                          <br>
+                                          <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modalFoto" data-backdrop="static">Tomar Foto</button>
                                       </div>
                                   </div>
                               </div>
@@ -225,7 +228,13 @@
                                 <label class="control-label">{{ form.cel_per_referencia.label }}</label>
                                 <input type="number" class="form-control" id="id_cel_per_referencia" name="cel_per_referencia" />
                               </div>
-                            </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="control-label">{{ form.seguro.label }}</label>
+                                <input type="text" class="form-control" id="id_seguro" name="seguro" />
+                              </div>
+                          </div>
                             
                         </div>
 
@@ -335,6 +344,54 @@
             </div>
 
 
+            <!-- Modal Foto-->
+            <div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close cancel" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Camara</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="form2" method="POST">
+                     
+                      
+
+                      <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                                                        <!-- Configure a few settings -->
+                            <div id="my_camera"></div>
+
+                            <script language="JavaScript">
+                              Webcam.set({
+                                width: 420,
+                                height: 340,
+                                image_format: 'jpeg',
+                                jpeg_quality: 500
+                              });
+                              Webcam.attach( '#my_camera' );
+                            </script>
+
+                            </div>
+                          </div>
+                          
+                      </div>
+
+                           
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default cancel" id="cancel" data-dismiss="modal">Cerrar</button>
+                    <button  type="button" class="btn btn-primary" onClick="take_snapshot()">Fotografíar</button>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             <!-- Modal clinica -->
             <div class="modal fade" id="Modalclinica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
@@ -398,6 +455,7 @@
     {% block js %}
     {% load staticfiles %}
     <script src="{% static "js/apps/clientes.js"%}"></script>
+    
     <script>
     // para renderizar en un img la imagen q se va subir
         function readURL(input) {
@@ -441,6 +499,58 @@
           $("#fecha_inactivo").val('');
         }
       }); 
+
+      /// ===== funciom para capturar con la camara =======
+      // function take_snapshot() {
+      
+      //   var codigo_gl = document.getElementById('id_codigo_gl').value;
+      //   webcam.set_api_url( '/save_image/'+escape(codigo_gl)+'/' );
+      //   webcam.set_hook( 'onComplete', 'my_completion_handler' );
+      //   // take snapshot and upload to server
+      //   webcam.snap();
+      // }
+
+      // function my_completion_handler(msg) {
+
+      //   if (msg.match(/(\/media\/\S+)/)) {
+      //     var image_url = RegExp.$1;
+      //     console.log('legooo aquii');
+      //     // show JPEG image in page
+      //     $('#image_upload_preview').attr('src', image_url);
+      //     // $('#modalFoto').modal('hide');
+          
+
+      //     // reset camera for another shot
+      //     webcam.reset();
+      //   }
+      //   else alert("Python Error: " + msg);
+      // }
+
+      var shutter = new Audio();
+      shutter.autoplay = false;
+      shutter.src = navigator.userAgent.match(/Firefox/) ? '{% static "webcamjs/shutter.ogg"%}' : '{% static "webcamjs/shutter.mp3"%}';
+
+      function take_snapshot() {
+        shutter.play();
+        Webcam.snap( function(data_uri) {
+          // snap complete, image data is in 'data_uri'
+          var codigo_gl = document.getElementById('id_codigo_gl').value;
+          var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+          document.getElementById('imagenf').value = raw_image_data;
+          $('#image_upload_preview').attr('src', data_uri);
+          // document.getElementById('myform').submit();
+          console.log(raw_image_data);
+          // Webcam.off();
+          // Webcam.upload( data_uri, '/save_image/'+escape(codigo_gl)+'/', function(code, text) {
+          //     // Upload complete!
+          //     // 'code' will be the HTTP response code from the server, e.g. 200
+          //     // 'text' will be the raw response content
+          //     $('#image_upload_preview').attr('src', data_uri);
+          //     console.log('capturooo');
+          // });
+
+        });
+      }
 
     </script>
   {% endblock js %}

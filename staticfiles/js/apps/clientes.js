@@ -32,10 +32,6 @@ $('#id_fecha_ingreso3').attr('disabled', true);
            
             required: true
         },
-        telefono: {
-           
-            required: true
-        },
         empresa: {
            
             required: true

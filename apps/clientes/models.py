@@ -23,7 +23,7 @@ class Cliente(models.Model):
 	apellidos = models.CharField(max_length=100)
 	edad = models.IntegerField()
 	ci = models.BigIntegerField()
-	telefono = models.IntegerField()
+	telefono = models.IntegerField(null=True, blank=True)
 	cel = models.IntegerField(null=True, blank=True)
 	foto = models.ImageField(upload_to='clientes', null=True, blank=True)
 	activo = models.BooleanField(default=True)
@@ -36,6 +36,7 @@ class Cliente(models.Model):
 	cel_per_referencia = models.IntegerField(null=True, blank=True)
 	usuario = models.CharField(max_length=50, null=True, blank=True)
 	fecha_inactivo = models.DateField(null=True, blank=True)
+	seguro = models.CharField(max_length=50, null=True, blank=True)
 
 	def __unicode__(self):
 		return "%s-%s-%s" % (self.codigo_gl, self.nombres, self.apellidos)
