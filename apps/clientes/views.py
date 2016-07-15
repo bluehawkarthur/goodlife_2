@@ -3,10 +3,10 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, T
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from .models import Cliente, DtoCodigo
+from .models import Cliente, DtoCodigo, ServiciosCostos, CostosPorCliente
 from apps.empresas.models import Empresa
 from apps.clinicas.models import Clinica
-from .forms import ClienteForm
+from .forms import ClienteForm, CostosForm, CostosPorClienteForm, CobrosClienteForm
 import json
 
 from datetime import date
@@ -17,6 +17,65 @@ from htmltopdf import render_to_pdf
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import base64
+import json
+from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import decimal
+
+
+# personalize de configuracions de cliente y ciente campos
+@method_decorator(csrf_exempt)
+def client(request):
+  #   config = Cliente.objects.all()
+  #   data = serializers.serialize(
+  #       'json', config, fields=('codigo_gl', 'fecha_ingreso','ciudad_origen', 'nombres',
+  # 'apellidos', 'edad', 'ci', 'telefono', 'cel', 'foto'))
+  #   return HttpResponse(data, content_type="application/json")
+
+    data = {"Message": None,
+              "Result": "OK",
+              "Records": list(),
+              "TotalRecordCount": None}
+    try:
+        start = int(request.GET['jtStartIndex'])
+        end = start + int(request.GET['jtPageSize'])
+        item_sort = request.GET['jtSorting'].split()[0]
+        if request.GET['jtSorting'].split()[1] == 'DESC':
+            item_sort = '-' + item_sort
+        data['TotalRecordCount'] = Cliente.objects.count()
+        for node in Cliente.objects.all().order_by(item_sort)[start:end]:
+            data["Records"].append({
+                'id': node.pk,
+                'codigo_gl': node.codigo_gl,
+                'nombres': node.nombres
+            })
+    except ObjectDoesNotExist:
+        data = {"Message": "Error: Node records not found.",
+                "Result": "ERROR"}
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+class ClienteDel(TemplateView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request):
+        if request.method == "POST":
+            n = Cliente.objects.get(id=request.POST['id'])
+            if not n:
+                data = {"Result": "ERROR",
+                        "Message": "Error: Object Does Not Exist"}
+            else:
+                n.delete()
+                data = {"Result": "OK"}
+        else:
+            data = {"Message": "Error: POST method is required.",
+                    "Result": "ERROR"}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+class practica(TemplateView):
+  template_name = 'clientes/pract.html'
 
 
 def RegistrarCliente(request):
@@ -78,32 +137,11 @@ def RegistrarCliente(request):
   return render_to_response('clientes/registrar_cliente.html', variables)
 
 
-class ClienteList(PaginationMixin, ListView):
+class ClienteList(ListView):
   template_name = 'clientes/lista_cliente.html'
-  paginate_by = 10
+
   model = Cliente
 
-  def get_queryset(self):
-        descripcion = self.request.GET.get('q', None)
-        dt = "%s" % descripcion
-        d_list = dt.split(" ")
-        q = d_list
-
-        q_objects = []
-
-        for item in q:
-            q_objects.append(Q(ci__icontains=item))
-            q_objects.append(Q(codigo_gl__icontains=item))
-            q_objects.append(Q(nombres__icontains=item))
-            q_objects.append(Q(apellidos__icontains=item))
-
-        query = reduce(operator.or_, q_objects)
-
-        if (descripcion):
-            object_list = self.model.objects.filter(query)
-        else:
-            object_list = self.model.objects.all().order_by('pk')
-        return object_list
 
 
 class ClienteDetail(DetailView):
@@ -165,6 +203,32 @@ def detalleCliente(request, pk):
     return render_to_pdf('clientes/clientepdf.html', {'detalle': detalle})
 
 
+@method_decorator(csrf_exempt)
+def serviciosCliente(request, pk):
+    cliente = Cliente.objects.get(id=pk)
+    costos = ServiciosCostos.objects.filter(cliente=pk)
+    if request.method == 'POST':
+      print 'llegoooo aaaaquiiii'
+      if costos:
+        costos.update(informe_final=request.POST['informe_final'],
+          fisioterapia=request.POST['fisioterapia'],
+          medicina_laboral=request.POST['medicina_laboral'],
+          puesto_trabajo=request.POST['puesto_trabajo'],
+          trabajo_social=request.POST['trabajo_social'])
+      else:
+        servicios = ServiciosCostos(
+          cliente=cliente,
+          informe_final=request.POST['informe_final'],
+          fisioterapia=request.POST['fisioterapia'],
+          medicina_laboral=request.POST['medicina_laboral'],
+          puesto_trabajo=request.POST['puesto_trabajo'],
+          trabajo_social=request.POST['trabajo_social'])
+        servicios.save()
+
+    # data = {'pk': empresa.pk, 'razon_socialemp': empresa.razon_social}
+
+    return render_to_response('clientes/servicios_cliente.html', {'costos': costos[0]})
+
 # @csrf_exempt
 # def SaveImage(request, codigo):
 #     print codigo
@@ -180,9 +244,9 @@ class SaveImage(TemplateView):
   def dispatch(self, *args, **kwargs):
 		self.filename = self.kwargs['codigo']+'.jpg'
 		return super(SaveImage, self).dispatch(*args, **kwargs)
-  
+
   def post(self, request, *args, **kwargs):
-		
+
 		imagen = base64.b64decode('')
 		# save it somewhere
 		f = open(settings.MEDIA_ROOT + '/clientes/'+ self.filename, 'wb')
@@ -193,3 +257,113 @@ class SaveImage(TemplateView):
 
   def get(self, request, *args, **kwargs):
 		return HttpResponse('No esta pasando el POST')
+
+
+def definir_costos_cliente(request, pk):
+
+  costocliente = CostosPorCliente.objects.filter(cliente=pk)
+
+  if request.method == "POST":
+    if 'nuevo' in request.POST:
+      CostosPorCliente.objects.filter(cliente=pk).delete()
+      formset = CostosForm(queryset=ServiciosCostos.objects.all())
+
+      return render(request, 'clientes/cobros_por_cliente.html', {'formset': formset, 'cancelado': False})
+
+    if 'guardar' in request.POST:
+      if costocliente:
+        print 'leeeeeeee'
+
+        formset = CostosPorClienteForm(request.POST, queryset=CostosPorCliente.objects.filter(cliente=pk))
+      else:
+        formset = CostosForm(request.POST, queryset=ServiciosCostos.objects.all())
+
+      if formset.is_valid():
+          for form in formset.forms:
+            if costocliente:
+              user = form.save(commit=False)
+              user.save()
+              # costocliente.update(costo=form.cleaned_data['costo'])
+            else:
+              costo = CostosPorCliente()
+              costo.servicio = form.cleaned_data['servicio']
+              costo.cliente = Cliente.objects.get(pk=pk)
+              costo.costo = form.cleaned_data['costo']
+              costo.save()
+
+          return HttpResponseRedirect(reverse_lazy('listar_cliente'))
+      else:
+        print formset
+
+
+
+  else:
+    cancelado = False
+    contador_pago = 0
+    contador = 0
+    for d in costocliente:
+      contador = contador + 1
+      if d.costo == d.pago:
+        contador_pago = contador_pago + 1
+
+    if contador == contador_pago:
+      cancelado = True
+
+    if costocliente:
+      formset = CostosPorClienteForm(queryset=CostosPorCliente.objects.filter(cliente=pk))
+    else:
+      formset = CostosForm(queryset=ServiciosCostos.objects.all())
+
+
+  return render(request, 'clientes/cobros_por_cliente.html', {'formset': formset, 'cancelado': cancelado})
+
+
+def cobroCliente(request, pk):
+
+  if request.method == "POST":
+
+    formset = CobrosClienteForm(request.POST, queryset=CostosPorCliente.objects.filter(cliente=pk))
+
+    if formset.is_valid():
+        for form in formset.forms:
+            monto = form.cleaned_data['monto']
+            pago = form.cleaned_data['pago']
+            if pago is None:
+              pago = 0
+
+            if monto is None:
+              monto = 0
+
+            total_pago = decimal.Decimal(pago) + monto
+            user = form.save(commit=False)
+            user.pago = total_pago
+            user.save()
+            # costo = CostosPorCliente()
+            # costo.servicio = form.cleaned_data['servicio']
+            # costo.cliente = Cliente.objects.get(pk=pk)
+            # costo.costo = form.cleaned_data['costo']
+            # costo.save()
+
+        return HttpResponseRedirect(reverse_lazy('listar_cliente'))
+    else:
+      print formset
+
+
+  else:
+    cancelado = False
+    datos = CostosPorCliente.objects.filter(cliente=pk)
+    contador_pago = 0
+    contador = 0
+    for d in datos:
+      contador = contador + 1
+      if d.costo == d.pago:
+        contador_pago = contador_pago + 1
+
+    if contador == contador_pago:
+      cancelado = True
+
+
+    formset = CobrosClienteForm(queryset=CostosPorCliente.objects.filter(cliente=pk))
+
+
+  return render(request, 'clientes/cobro_cliente.html', {'formset': formset, 'cancelado': cancelado})

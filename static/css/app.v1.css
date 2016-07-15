@@ -11629,7 +11629,7 @@ a .icon-flip-vertical:before {
     font-weight: normal;
 }
 
-.dataTables_wrapper .sorting:after {
+/*.dataTables_wrapper .sorting:after {
     content: "\f0dc";
     color: #ccc;
 }
@@ -11640,7 +11640,7 @@ a .icon-flip-vertical:before {
 
 .dataTables_wrapper .sorting_desc:after {
     content: "\f0dd";
-}
+}*/
 
 .datepicker {
     top: 0;

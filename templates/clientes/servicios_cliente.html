@@ -1,0 +1,123 @@
+{% extends 'base_sistema.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% load widget_tweaks %}
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#static" data-toggle="tab">Crear Cliente</a></li>
+          </ul>
+      </header>
+      <section class="scrollable wrapper">
+        <div class="panel panel-default">
+          <div class="container">
+           <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                  <div class="form-group">
+                    <form class=""  method="POST" enctype='multipart/form-data' id="formcliente">
+                      <div class="card-panel">
+                        <h3 class="header2">Costos Cliente</h3>
+                        {% csrf_token %} 
+
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.nombres %} has-error {% endif %}">
+                                  <label class="control-label">Informe Final</label>
+                                  <input type="text" class="form-control" id="id_nombres" name="informe_final" value="{{costos.informe_final}}"/>
+                                  <div class="help-block with-errors">
+                                    {{form.errors.nombres|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.apellidos %} has-error {% endif %}">
+                                <label class="control-label">Fisioterapia</label>
+                                <input type="text" class="form-control" id="id_apellidos" name="fisioterapia" value="{{costos.fisioterapia}}"/>
+                                <div class="help-block with-errors">
+                                  {{form.errors.apellidos|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.edad %} has-error {% endif %}">
+                                <label class="control-label">Medicina laboral</label>
+                                <input type="text" class="form-control" id="id_edad" name="medicina_laboral" value="{{costos.medicina_laboral}}" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.edad|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.ci %} has-error {% endif %}">
+                                <label class="control-label">Puesto de trabajo</label>
+                                <input type="text" class="form-control" id="id_ci" name="puesto_trabajo" value="{{costos.puesto_trabajo}}" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.ci|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group {% if form.errors.telefono %} has-error {% endif %}">
+                                <label class="control-label">Trabajo social</label>
+                                <input type="text" class="form-control" id="id_telefono" name="trabajo_social" value="{{costos.trabajo_social}}" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.telefono|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            
+                        </div>
+
+                      
+
+                     
+                        
+
+                      </div>
+
+                      <div class="form-group">
+                        <div>
+                          <button class="btn btn-primary " id="save"  type="submit">
+                            Guardar
+                          </button>
+                          <a href="/listar_cliente" class="btn  btn-success"><i class="left"></i> Volver  Atras</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+          
+
+
+            
+
+           
+
+
+          </div>
+        </div>
+      </section>
+  </section>      
+</section>
+    {% endblock %}
+
+    {% block js %}
+    {% load staticfiles %}
+     <!-- <script src="{% static "js/apps/clientes.js"%}"></script> -->
+    
+    <script>
+    
+    </script>
+  {% endblock js %}

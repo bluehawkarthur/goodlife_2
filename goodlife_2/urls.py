@@ -36,6 +36,9 @@ urlpatterns = [
     # TRAMITES
     url(r'^', include('apps.tramites.urls'), name='tramites'),
 
+    # CONFIGURACION
+    url(r'^', include('apps.config.urls'), name='config'),
+
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

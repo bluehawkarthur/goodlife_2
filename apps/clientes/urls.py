@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from .views import ClienteList, ClienteDetail, ClienteUpdate, SaveImage
+from .views import ClienteList, ClienteDetail, ClienteUpdate, SaveImage, practica, ClienteDel
 
 urlpatterns = [
     url(r'^registrar_cliente/$', 'apps.clientes.views.RegistrarCliente', name='registrar_cliente'),
@@ -11,5 +11,11 @@ urlpatterns = [
     url(r'^registrar_clinic/$', 'apps.clientes.views.addClinica', name='registrar_clinic'),
     url(r'^detalle_cliente/(?P<pk>\d+)$', 'apps.clientes.views.detalleCliente', name='detallecliente'),
     url(r'^save_image/(?P<codigo>[\w\-]+)/$', SaveImage.as_view(), name='salvar_imagen'),
+    url(r'^client/', 'apps.clientes.views.client', name="client"),
+    url(r'^del/$', ClienteDel.as_view()),
+    url(r'^practica/$', practica.as_view(), name='pracica'),
+    url(r'^servicios_cliente/(?P<pk>\d+)$', 'apps.clientes.views.serviciosCliente', name="servicios_cliente"),
+    url(r'^costos_por_cliente/(?P<pk>\d+)$', 'apps.clientes.views.definir_costos_cliente', name='costos_por_cliente'),
+    url(r'^cobro_cliente/(?P<pk>\d+)$', 'apps.clientes.views.cobroCliente', name='cobro_cliente'),
     # url(r'^save_image/(?P<codigo>[\w\-]+)$', 'apps.clientes.views.SaveImage', name='salvar_imagen'),
 ]

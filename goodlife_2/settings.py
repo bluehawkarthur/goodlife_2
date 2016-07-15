@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'apps.clientes',
     'apps.tramites',
     'apps.inicio',
+    'apps.config',
     #PAQUETES
     'widget_tweaks',
 )

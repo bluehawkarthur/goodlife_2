@@ -1,8 +1,9 @@
 from django import forms, http
-from .models import Cliente
+from .models import Cliente, ServiciosCostos, CostosPorCliente
 
 
 from django.forms import ModelForm
+from django.forms import modelformset_factory
 
 from apps.empresas.models import Empresa
 from apps.tramites.models import Tramite, TramiteAfp
@@ -68,3 +69,38 @@ class ClienteForm(forms.Form):
 	
 	# class Meta:
 	# 	model = Cliente
+
+
+CostosFormSet = modelformset_factory(ServiciosCostos, extra=0, fields=('servicio', 'costo'))
+
+
+class CostosForm(CostosFormSet):
+
+    def add_fields(self, form, index):
+
+        super(CostosForm, self).add_fields(form, index)
+        form.fields['servicio'].widget = forms.HiddenInput()
+
+
+CostosPorClienteFormSet = modelformset_factory(CostosPorCliente, extra=0, fields=('servicio', 'costo', 'pago'))
+
+
+class CostosPorClienteForm(CostosPorClienteFormSet):
+
+    def add_fields(self, form, index):
+
+        super(CostosPorClienteForm, self).add_fields(form, index)
+        form.fields['servicio'].widget = forms.HiddenInput()
+
+
+CobrosClienteFormSet = modelformset_factory(CostosPorCliente, extra=0, fields=('servicio', 'costo', 'pago'))
+
+
+class CobrosClienteForm(CobrosClienteFormSet):
+
+    def add_fields(self, form, index):
+        super(CobrosClienteForm, self).add_fields(form, index)
+        form.fields['servicio'].widget = forms.HiddenInput()
+        form.fields['costo'].widget = forms.HiddenInput()
+        form.fields['pago'].widget = forms.HiddenInput()
+        form.fields['monto'] = forms.IntegerField(required=False)

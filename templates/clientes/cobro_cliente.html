@@ -1,0 +1,179 @@
+{% extends 'base_sistema.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#static" data-toggle="tab">Clientes</a></li>
+          </ul>
+      </header>
+      <section class="scrollable wrapper">
+      <div class="tab-content">
+        <div class="panel panel-default">
+      <!-- Default panel contents -->
+          <section class="panel">
+              <header class="panel-heading"> Configuracion Cliente </header>
+              {% if cancelado %}
+                <div class="alert alert-success alert-block"> <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button> <h4><i class="icon-ok-sign"></i>Termino de pagar todo</h4> <p></p>
+                </div>
+              {% else %}
+                aun deveeeee
+              {% endif %}
+              <div class="table-responsive">
+                
+              <form   method="POST" >
+                  <table  class="table table-bordered table-hover" id="tabla">
+                      <thead>
+                        <tr>
+                          <th>Servicio</th>
+                          <th>Importe a Pagar</th>
+                          <th>Aportes</th>
+                          {% if not cancelado %}
+                          <th>Montos a Cobrar</th>
+                          {% endif %}
+                        </tr>
+                      </thead>
+                    <tbody>
+
+                    {% for form in formset.forms %}
+                      <tr>
+
+                        <td>
+
+                          {{form.id}}
+                          {{form.servicio.value}}
+                          {{form.servicio}}
+
+                        </td>
+                        <td>
+                          {{form.costo.value}}
+                          {{form.costo}}
+                          </td>
+                        <td>
+                          {% if form.pago.value == None %}
+                            0
+                          {% else %}
+                            {{form.pago.value}}
+                          {% endif %}
+                          {{form.pago}}
+                        </td>
+                        {% if not cancelado %}
+                        <td>
+                          {{form.monto|add_class:"calculo_totales_down"}}
+                        </td>
+                        {% endif %}
+
+                      </tr>
+                    {% endfor %}
+                    <tr>
+                      <td></td>
+                      <td id="sum-total-importe"></td>
+                      <td id="sum-total-pago"></td>
+                      {% if not cancelado %}
+                      <td id="sum-total-monto"></td>
+                      {% endif %}
+                    </tr>
+                    </tbody>
+                  </table>
+                   {{ formset.management_form }}
+                   {% csrf_token %}
+                  {% if not cancelado %}
+                   <div class="row text-sm wrapper">
+                      <div class="col-sm-5 m-b-xs">
+
+                        <button class="btn cyan waves-effect waves-light right" id="save" name="action">Guardar
+                    <i class="mdi-content-save right"></i>
+                    </button>
+                      </div>
+                      <div class="col-sm-4 m-b-xs">
+
+                      </div>
+                      <div class="col-sm-3">
+
+                      </div>
+                  </div>
+                  {% endif %}
+
+                 </form>
+              </div>
+
+
+          </section>
+
+      </div>
+    </section>
+  </section>
+</section>
+
+{% endblock content %}
+{% block js %}
+<script>
+
+// var total = 0;
+function calTotal(){
+
+    var total_importe=0;
+    var total_pago=0;
+    var total_cobro=0;
+
+    var total_form = $('#id_form-TOTAL_FORMS').val();
+    console.log(total_form);
+
+    for (i = 0; i < total_form; i++) {
+
+      var stimporte = $('#id_form-'+i+'-costo').val();
+      var stpago = $('#id_form-'+i+'-pago').val();
+      var stmonto = $('#id_form-'+i+'-monto').val();
+
+
+      total_importe = total_importe + stimporte*1;
+      total_pago = total_pago + stpago*1
+      total_cobro = total_cobro + stmonto*1
+
+    }
+
+    console.log(total_importe);
+
+
+    var t=0;
+    // $('#tabla tbody tr').each(function () {
+    //     total = total*1 + $(this).find("td").eq(1).html()*1;
+    //     console.log($(this).find("td input").eq(1).html());
+
+
+    //     if (!isNaN(total)) {
+    //       t = t*1 + $(this).find("td").eq(1).html()*1;
+
+    //     };
+    // });
+
+    $('#sum-total-importe').text(total_importe);
+
+    $('#sum-total-pago').text(total_pago);
+
+    $('#sum-total-monto').text(total_cobro);
+
+
+}
+
+calTotal();
+
+var total_form = $('#id_form-TOTAL_FORMS').val();
+for (i = 0; i < total_form; i++) {
+
+      var stimporte = $('#id_form-'+i+'-costo').val();
+      var stpago = $('#id_form-'+i+'-pago').val();
+      $('#id_form-'+i+'-monto').val(stimporte-stpago);
+
+
+
+    }
+
+$(".calculo_totales_down").keyup(function(){
+  calTotal();
+});
+
+</script>
+{% endblock %}

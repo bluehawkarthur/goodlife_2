@@ -49,3 +49,43 @@ class DtoCodigo(models.Model):
 
 	def __unicode__(self):
 		return "%s - %s" % (self.departamento, self.cantidad)
+
+
+class ServiciosCostos(models.Model):    # Cobros Default
+	servicio = models.CharField(max_length=100, null=True, blank=True)
+	costo = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+	def __unicode__(self):
+		return "%s - %s" % (self.servicio, self.costo)
+
+
+class CostosPorCliente(models.Model):
+	cliente = models.ForeignKey(Cliente, null=True, blank=True)
+	servicio = models.CharField(max_length=100)
+	costo = models.DecimalField(max_digits=10, decimal_places=2)
+	pago = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	cancelado = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return "%s - %s -%s" % (self.cliente.codigo_gl, self. servicio, self.costo)
+
+
+class ServiciosCobroCliente(models.Model): # Cabecera de Cobros
+	cliente = models.ForeignKey(Cliente, null=True, blank=True)
+	fecha = models.DateField()
+	num_recibo = models.IntegerField()
+	total = models.DecimalField(max_digits=10, decimal_places=2)
+	cancelado = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return "%s - %s" % (self.cliente.codigo_gl, self.fecha)
+
+
+class ServiciosCobroClienteDetalle(models.Model): # Detalle de Cobros
+	cobro = models.ForeignKey(ServiciosCobroCliente, null=True, blank=True)
+	servicio = models.CharField(max_length=100)
+	costo = models.DecimalField(max_digits=10, decimal_places=2)
+	pago = models.DecimalField(max_digits=10, decimal_places=2)
+
+	def __unicode__(self):
+		return "%s - %s - %s - %s" % (self.cobro, self.servicio, self.costo, self.pago)

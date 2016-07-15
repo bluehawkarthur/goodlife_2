@@ -25,20 +25,19 @@
 					            
 					        </div>
 					        <div class="col-sm-3">
-					        	<form method="get">
-					            <div class="input-group">
-					                <input type="text" class="input-sm form-control" placeholder="buscar" name="q"> <span class="input-group-btn"> <button class="btn btn-sm btn-white" type="submit">Buscar</button> </span> </div>
-					            </form>
+					        	
 					        </div>
 					    </div>
 					    <div class="table-responsive">
-					        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+					        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover" id="tabla">
 						          <thead>
 						            <tr>
 						            	<th>Codigo Cliente</th>
 						            	<th>CI</th>
 										<th>Nombres</th>
 										<th>Apellidos</th>
+										<th>Definir Costos</th>
+										<th>Cobros</th>
 										<th>Detalle</th>
 										<th>Modificar</th>
 										<th>Eliminar</th>
@@ -51,6 +50,12 @@
 											<td>{{object.ci}}</td>
 											<td>{{object.nombres}}</td>
 											<td>{{object.apellidos}}</td>
+											<td>
+												<a class="btn btn-info" href="/costos_por_cliente/{{object.id}}"><i class="icon-gear text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-success" href="/cobro_cliente/{{object.id}}"><i class="icon-dollar text"></i></a>
+											</td>
 											<td>
 												<a class="btn btn-default" href="/detail_cliente/{{object.id}}"><i class="icon-eye-open text"></i></a>
 											</td>
@@ -84,7 +89,7 @@
 									</tbody>
 						        </table>
 					    </div>
-						{% include "_pagination.html" %}
+					
 					    
 					</section>
 						
@@ -94,4 +99,31 @@
 </section>
 	
 {% endblock content %}	
+{% block js %}
+<script>
+ var table = $('#tabla').dataTable( {
+
+        language: {
+        	url: "/static/localizacion/es_ES.json"
+    	}
+    } );
+
+$('#tabla tbody').on( 'click', 'tr', function() 
+    {
+        if ($(this).hasClass('selected') ) 
+        {           
+            $(this).removeClass('selected');
+             
+        }
+        else 
+        {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');                      
+        }
+    });   
+  
+    
+
+</script>
+{% endblock %}
 	
