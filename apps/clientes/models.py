@@ -74,8 +74,7 @@ class ServiciosCobroCliente(models.Model): # Cabecera de Cobros
 	cliente = models.ForeignKey(Cliente, null=True, blank=True)
 	fecha = models.DateField()
 	num_recibo = models.IntegerField()
-	total = models.DecimalField(max_digits=10, decimal_places=2)
-	cancelado = models.BooleanField(default=False)
+	total = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
 	def __unicode__(self):
 		return "%s - %s" % (self.cliente.codigo_gl, self.fecha)
@@ -86,6 +85,7 @@ class ServiciosCobroClienteDetalle(models.Model): # Detalle de Cobros
 	servicio = models.CharField(max_length=100)
 	costo = models.DecimalField(max_digits=10, decimal_places=2)
 	pago = models.DecimalField(max_digits=10, decimal_places=2)
+	amortizacion = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
 	def __unicode__(self):
 		return "%s - %s - %s - %s" % (self.cobro, self.servicio, self.costo, self.pago)

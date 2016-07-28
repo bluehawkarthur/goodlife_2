@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" href="{% static "css/app.v1.css"%}">
-    
+
     <link rel="stylesheet" href="{% static "css/font.css"%}" cache="false">
     <link rel="stylesheet" href="{% static "css/font-awesome.css"%}">
     <link rel="stylesheet" href="{% static "dataTables/css/jquery.dataTables.css"%}">
+    <link rel="stylesheet" href="{% static "css/datedropper.css"%}">
     <!-- <link rel="stylesheet" href="{% static "dataTables/css/dataTables.bootstrap.css"%}"> -->
 
     <script src="{% static "js/jquery.min.js"%}"></script>
@@ -23,6 +24,7 @@
 
     <script src="{% static "js/jquery.validate.js"%}"></script>
     <script type="text/javascript" src="{% static "webcamjs/webcam.js"%}"></script>
+    <script src="{% static "js/datedropper.js"%}"></script>
     <!--[if lt IE 9]> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/html5.js" cache="false"></script> <script src="js/ie/fix.js" cache="false"></script> <![endif]-->
 </head>
 
@@ -45,7 +47,7 @@
                         <div class="nav-avatar pos-rlt">
                             <a href="#" class="thumb-sm avatar animated rollIn" data-toggle="dropdown"> <img src="{% static "images/avatar.jpg" %}" alt="" class=""> <span class="caret caret-white"></span> </a>
                             <ul class="dropdown-menu m-t-sm animated fadeInLeft"> <span class="arrow top"></span>
-                                
+
                                 <li> <a href="#">Profile</a> </li>
                                 <li class="divider"></li>
                                 <li> <a href="/logout">Salir</a> </li>
@@ -89,17 +91,17 @@
                                 <a href="/listar_tramiteafp"> <i class="fa fa-at"></i> <span>AFP</span> </a>
                             </li>
                             <li class="dropdown-submenu active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                                    <i class="icon-gear"></i> <span>Configuracion</span> 
-                                </a> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-gear"></i> <span>Configuracion</span>
+                                </a>
 
-                                <ul class="dropdown-menu"> 
+                                <ul class="dropdown-menu">
                                     <li> <a href="/config_costos">Configuracion Costos</a> </li>
 
 
-                                </ul> 
+                                </ul>
                             </li>
-                        
+
                         </ul>
                     </nav>
                     <!-- / nav -->
@@ -113,14 +115,14 @@
         <!-- .vbox -->
         {% block content %}
 
-        
+
 
         {% endblock %}
         <!-- /.vbox -->
     </section>
     {% block js %}
     {% endblock js %}
-    
+
     <!-- Bootstrap -->
     <!-- Sparkline Chart -->
     <!-- App -->

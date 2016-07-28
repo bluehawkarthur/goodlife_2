@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+  <style>
+   .center-text{
+    text-align:center;
+   }
+   .text-size{
+    font-size: 12px;
+
+   }
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<section id="content">
+        <!--start container-->
+        <div class="container">
+           <table>
+              <tr style="border:none;">
+                <td class="center-text text-size" >
+                </td>
+                <td class="center-text">
+                  <b style="font-size: 20px;">REPORTE DE COBROS REALIZADOS</b> <br>
+                  <b>{{cliente.nombres}} {{cliente.apellidos}}</b>
+                </td>
+                <td class="center-text text-size">
+                </td>
+              </tr>
+            </table>
+            <br>
+
+          <table style="border:1px solid black;" class="text-size">
+          <thead>
+            <tr style="padding: 2px;">
+              <th>N° recibo</th>
+              <th>
+                Fecha
+              </th>
+              <th data-field="item">servicio</th>
+              <th data-field="item">cobro</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {%  for d in detalle %}
+              {% if d.amortizacion != 0 %}
+              <tr style="text-align:center; padding: 2px;">
+                <td width="10%">
+                  {{d.cobro.num_recibo}}
+                </td>
+                <td width="25%">
+                  {{d.cobro.fecha}}
+                </td>
+                <td width="25%">{{d.servicio}}</td>
+                <td width="10%">{{d.amortizacion}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+
+
+            <tr style="border-botton:1px; border-right:none; border-left:none;">
+              <td colspan="2" class="white"></td>
+
+              <td ><br><b>Total:</b></td>
+              <td class="" id="sum-subtotal"><br>{{total}}</td>
+            </tr>
+          </tbody>
+          </table>
+
+
+
+
+          </div>
+        </div>
+        <!--end container-->
+</section>
+
+
+
+</body>
+</html>

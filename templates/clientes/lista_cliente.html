@@ -16,16 +16,16 @@
 					    <header class="panel-heading"> Lista de Clientes de Good Life: </header>
 					    <div class="row text-sm wrapper">
 					        <div class="col-sm-5 m-b-xs">
-					            
-					            
+
+
 					            <a class="btn btn-sm btn-success" href="/registrar_cliente/">Crear Cliente</a>
 
 					        </div>
 					        <div class="col-sm-4 m-b-xs">
-					            
+
 					        </div>
 					        <div class="col-sm-3">
-					        	
+
 					        </div>
 					    </div>
 					    <div class="table-responsive">
@@ -38,6 +38,7 @@
 										<th>Apellidos</th>
 										<th>Definir Costos</th>
 										<th>Cobros</th>
+										<th>Reporte</th>
 										<th>Detalle</th>
 										<th>Modificar</th>
 										<th>Eliminar</th>
@@ -55,6 +56,9 @@
 											</td>
 											<td>
 												<a class="btn btn-success" href="/cobro_cliente/{{object.id}}"><i class="icon-dollar text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-white" href="/reportecobro/{{object.id}}" target="_blank"><i class="icon-bar-chart text"></i></a>
 											</td>
 											<td>
 												<a class="btn btn-default" href="/detail_cliente/{{object.id}}"><i class="icon-eye-open text"></i></a>
@@ -77,7 +81,7 @@
 												      </div>
 												      <div class="modal-footer">
 												        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-												   
+
 												        <a href="/delete_cliente/{{object.id}}" class="btn btn-primary">Eliminar</a>
 												      </div>
 												    </div>
@@ -89,16 +93,16 @@
 									</tbody>
 						        </table>
 					    </div>
-					
-					    
+
+
 					</section>
-						
+
 			</div>
 		</section>
 	</section>
 </section>
-	
-{% endblock content %}	
+
+{% endblock content %}
 {% block js %}
 <script>
  var table = $('#tabla').dataTable( {
@@ -108,22 +112,21 @@
     	}
     } );
 
-$('#tabla tbody').on( 'click', 'tr', function() 
+$('#tabla tbody').on( 'click', 'tr', function()
     {
-        if ($(this).hasClass('selected') ) 
-        {           
+        if ($(this).hasClass('selected') )
+        {
             $(this).removeClass('selected');
-             
+
         }
-        else 
+        else
         {
             table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');                      
+            $(this).addClass('selected');
         }
-    });   
-  
-    
+    });
+
+
 
 </script>
 {% endblock %}
-	

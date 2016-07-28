@@ -2,6 +2,12 @@
 
 {% block content %}
 {% load widget_tweaks %}
+<style media="screen">
+  .flecha{
+    position: fixed;
+    margin: -30px 200px;
+  }
+</style>
 <section id="content">
   <section class="vbox">
     <header class="header bg-success bg-gradient">
@@ -15,21 +21,36 @@
       <!-- Default panel contents -->
           <section class="panel">
               <header class="panel-heading"> Configuracion Cliente </header>
-              {% if cancelado %}
-                <div class="alert alert-success alert-block"> <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button> <h4><i class="icon-ok-sign"></i>Termino de pagar todo</h4> <p></p>
-                </div>
+
+              {% if existe %}
+                {% if cancelado %}
+                  <div class="alert alert-success alert-block"> <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button> <h4><i class="icon-ok-sign"></i>Termino de pagar todo</h4> <p></p>
+                  </div>
+                {% endif %}
               {% else %}
-                aun deveeeee
+                <div class="alert alert-danger alert-block"> <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button> <h4><i class="icon-ok-sign"></i>No exiten pagos</h4> <p></p>
+                </div>
               {% endif %}
+              <form   method="POST" target="_blank">
+
+                  <div class="col-sm-3">
+                  <div class="form-group">
+                    <label class="control-label">Fecha</label>
+                    <input type="text" name="fecha" id="date-picker" class="form-control">
+                  </div>
+                  </div>
+
+
               <div class="table-responsive">
-                
-              <form   method="POST" >
+
+
+
                   <table  class="table table-bordered table-hover" id="tabla">
                       <thead>
                         <tr>
                           <th>Servicio</th>
                           <th>Importe a Pagar</th>
-                          <th>Aportes</th>
+                          <th>Amortizaciones</th>
                           {% if not cancelado %}
                           <th>Montos a Cobrar</th>
                           {% endif %}
@@ -61,7 +82,11 @@
                         </td>
                         {% if not cancelado %}
                         <td>
-                          {{form.monto|add_class:"calculo_totales_down"}}
+                          <div class="form-group">
+                            {{form.monto|add_class:"form-control calculo_totales_down"|attr:"style:width: 50%;"}}
+                            <span class="monto-{{ forloop.counter0 }}"></span>
+                          </div>
+
                         </td>
                         {% endif %}
 
@@ -83,9 +108,12 @@
                    <div class="row text-sm wrapper">
                       <div class="col-sm-5 m-b-xs">
 
-                        <button class="btn cyan waves-effect waves-light right" id="save" name="action">Guardar
+                        <button class="btn  btn-primary refresh" id="save" name="guardar">Guardar
                     <i class="mdi-content-save right"></i>
                     </button>
+                    <button class="btn  btn-success" id="save" name="imprimir">Imprimir
+                <i class="mdi-content-save right"></i>
+                </button>
                       </div>
                       <div class="col-sm-4 m-b-xs">
 
@@ -96,8 +124,9 @@
                   </div>
                   {% endif %}
 
-                 </form>
+
               </div>
+              </form>
 
 
           </section>
@@ -110,6 +139,16 @@
 {% endblock content %}
 {% block js %}
 <script>
+
+// ---------- refresh page this save monto ---------
+ function autoRefresh1()
+  {
+       window.location.reload();
+  }
+
+ $( ".refresh" ).click(function() {
+       setInterval('autoRefresh1()', 1000);
+  });
 
 // var total = 0;
 function calTotal(){
@@ -161,19 +200,41 @@ function calTotal(){
 calTotal();
 
 var total_form = $('#id_form-TOTAL_FORMS').val();
+var total_cobro=0;
 for (i = 0; i < total_form; i++) {
-
       var stimporte = $('#id_form-'+i+'-costo').val();
       var stpago = $('#id_form-'+i+'-pago').val();
       $('#id_form-'+i+'-monto').val(stimporte-stpago);
 
+      var stmonto = $('#id_form-'+i+'-monto').val();
+      total_cobro = total_cobro + stmonto*1
+      if (stimporte-stpago == 0) {
+        console.log('entro aquiii');
+        $('.monto-'+i).html('<i class="icon-ok icon-2x text-success flecha"></i>');
+      }
+}
 
-
-    }
+$('#sum-total-monto').text(total_cobro);
 
 $(".calculo_totales_down").keyup(function(){
   calTotal();
 });
+
+$( "#date-picker" ).dateDropper({
+  'lang': 'es',
+  'format': 'd-m-Y',
+  'dropPrimaryColor': '#92cf5c',
+  'dropBorder': '1px solid #92cf5c',
+  'animate': false
+});
+
+// ====== para mostrar fecha de ingreso en el input ====
+var now = new Date();
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = (day)+"-"+(month)+"-"+now.getFullYear() ;
+
+$('#date-picker').val(today);
 
 </script>
 {% endblock %}

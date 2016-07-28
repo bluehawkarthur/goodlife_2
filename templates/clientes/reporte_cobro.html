@@ -1,0 +1,96 @@
+{% extends 'base_sistema.html' %}
+
+{% block content %}
+<section id="content">
+	<section class="vbox">
+		<header class="header bg-success bg-gradient">
+	        <ul class="nav nav-tabs">
+	            <li class="active"><a href="#static" data-toggle="tab">Clientes</a></li>
+	        </ul>
+	    </header>
+	    <section class="scrollable wrapper">
+			<div class="tab-content">
+				<div class="panel panel-default">
+			<!-- Default panel contents -->
+					<section class="panel">
+					    <header class="panel-heading"> Lista de Clientes de Good Life: </header>
+					    <div class="row text-sm wrapper">
+					        <div class="col-sm-5 m-b-xs">
+
+
+					          <h5><b>Codigo:</b> {{cliente.codigo_gl}}</h5><br>
+                    <h5><b>Nombre:</b> {{cliente.nombres}} {{cliente.apellidos}}</h5>
+
+					        </div>
+					        <div class="col-sm-4 m-b-xs">
+
+					        </div>
+					        <div class="col-sm-3">
+
+					        </div>
+					    </div>
+					    <div class="table-responsive">
+					        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover" id="tabla">
+						          <thead>
+						            <tr>
+						            	<th>N° recibo</th>
+						            	<th>Fecha</th>
+                          <th>Total</th>
+
+										<th>Detalle</th>
+
+						            </tr>
+							        </thead>
+										<tbody>
+									{% for c in cobro %}
+										<tr>
+											<td>{{c.num_recibo}}</td>
+											<td>{{c.fecha}}</td>
+                      <td>{{c.total}}</td>
+											<td>
+												<a class="btn btn-default" href="/detail_cliente/{{object.id}}"><i class="icon-eye-open text"></i></a>
+											</td>
+
+
+										</tr>
+									{% endfor %}
+									</tbody>
+						        </table>
+					    </div>
+
+
+					</section>
+
+			</div>
+		</section>
+	</section>
+</section>
+
+{% endblock content %}
+{% block js %}
+<script>
+ var table = $('#tabla').dataTable( {
+
+        language: {
+        	url: "/static/localizacion/es_ES.json"
+    	}
+    } );
+
+$('#tabla tbody').on( 'click', 'tr', function()
+    {
+        if ($(this).hasClass('selected') )
+        {
+            $(this).removeClass('selected');
+
+        }
+        else
+        {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+
+
+
+</script>
+{% endblock %}

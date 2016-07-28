@@ -17,5 +17,7 @@ urlpatterns = [
     url(r'^servicios_cliente/(?P<pk>\d+)$', 'apps.clientes.views.serviciosCliente', name="servicios_cliente"),
     url(r'^costos_por_cliente/(?P<pk>\d+)$', 'apps.clientes.views.definir_costos_cliente', name='costos_por_cliente'),
     url(r'^cobro_cliente/(?P<pk>\d+)$', 'apps.clientes.views.cobroCliente', name='cobro_cliente'),
+    url(r'^detallecobro/(?P<pk>\d+)$', 'apps.clientes.views.detalleCobro', name='detallecobro'),
+    url(r'^reportecobro/(?P<pk>\d+)$', 'apps.clientes.views.reporteCobro', name='reportecobro'),
     # url(r'^save_image/(?P<codigo>[\w\-]+)$', 'apps.clientes.views.SaveImage', name='salvar_imagen'),
 ]

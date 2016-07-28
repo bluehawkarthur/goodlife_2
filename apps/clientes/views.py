@@ -3,13 +3,14 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, T
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from .models import Cliente, DtoCodigo, ServiciosCostos, CostosPorCliente
+from .models import Cliente, DtoCodigo, ServiciosCostos, CostosPorCliente, ServiciosCobroCliente, ServiciosCobroClienteDetalle
 from apps.empresas.models import Empresa
 from apps.clinicas.models import Clinica
 from .forms import ClienteForm, CostosForm, CostosPorClienteForm, CobrosClienteForm
 import json
 
 from datetime import date
+import datetime
 from django.db.models import Q
 import operator
 from pure_pagination.mixins import PaginationMixin
@@ -266,7 +267,15 @@ def definir_costos_cliente(request, pk):
   if request.method == "POST":
     if 'nuevo' in request.POST:
       CostosPorCliente.objects.filter(cliente=pk).delete()
-      formset = CostosForm(queryset=ServiciosCostos.objects.all())
+      default = ServiciosCostos.objects.all()
+      for c in default:
+           costo = CostosPorCliente()
+           costo.servicio = c.servicio
+           costo.cliente = Cliente.objects.get(pk=pk)
+           costo.costo = c.costo
+           costo.save()
+
+      formset = CostosPorClienteForm(queryset=CostosPorCliente.objects.filter(cliente=pk))
 
       return render(request, 'clientes/cobros_por_cliente.html', {'formset': formset, 'cancelado': False})
 
@@ -301,6 +310,10 @@ def definir_costos_cliente(request, pk):
     cancelado = False
     contador_pago = 0
     contador = 0
+    existe = False
+    if costocliente:
+        existe = True
+
     for d in costocliente:
       contador = contador + 1
       if d.costo == d.pago:
@@ -315,7 +328,7 @@ def definir_costos_cliente(request, pk):
       formset = CostosForm(queryset=ServiciosCostos.objects.all())
 
 
-  return render(request, 'clientes/cobros_por_cliente.html', {'formset': formset, 'cancelado': cancelado})
+  return render(request, 'clientes/cobros_por_cliente.html', {'formset': formset, 'existe': existe, 'cancelado': cancelado})
 
 
 def cobroCliente(request, pk):
@@ -323,35 +336,59 @@ def cobroCliente(request, pk):
   if request.method == "POST":
 
     formset = CobrosClienteForm(request.POST, queryset=CostosPorCliente.objects.filter(cliente=pk))
+    if 'guardar' in request.POST:
+        if formset.is_valid():
+            # guardando la cabezera
+            cobrocli = ServiciosCobroCliente.objects.exclude(num_recibo__isnull=True).last()
+            if cobrocli:
+                nro = cobrocli.num_recibo
+                if nro is None:
+                    nro = 0
+            else:
+                nro = 0
+            date_1 = datetime.datetime.strptime(request.POST['fecha'], '%d-%m-%Y').strftime("%Y-%m-%d")
 
-    if formset.is_valid():
-        for form in formset.forms:
-            monto = form.cleaned_data['monto']
-            pago = form.cleaned_data['pago']
-            if pago is None:
-              pago = 0
+            cabezera = ServiciosCobroCliente()
+            cabezera.cliente = Cliente.objects.get(pk=pk)
+            cabezera.fecha = date_1
+            cabezera.num_recibo = nro + 1
+            cabezera.save()
 
-            if monto is None:
-              monto = 0
+            for form in formset.forms:
+                monto = form.cleaned_data['monto']
+                pago = form.cleaned_data['pago']
+                if pago is None:
+                  pago = 0
 
-            total_pago = decimal.Decimal(pago) + monto
-            user = form.save(commit=False)
-            user.pago = total_pago
-            user.save()
-            # costo = CostosPorCliente()
-            # costo.servicio = form.cleaned_data['servicio']
-            # costo.cliente = Cliente.objects.get(pk=pk)
-            # costo.costo = form.cleaned_data['costo']
-            # costo.save()
+                if monto is None:
+                  monto = 0
 
-        return HttpResponseRedirect(reverse_lazy('listar_cliente'))
-    else:
-      print formset
+                total_pago = decimal.Decimal(pago) + monto
+                user = form.save(commit=False)
+                user.pago = total_pago
+                user.save()
+                detalle = ServiciosCobroClienteDetalle()
+                detalle.cobro = cabezera
+                detalle.servicio = form.cleaned_data['servicio']
+                detalle.costo = form.cleaned_data['costo']
+                detalle.pago = total_pago
+                detalle.amortizacion = form.cleaned_data['monto']
+                detalle.save()
+
+            return HttpResponseRedirect(reverse('detallecobro', args=(pk,)))
+
+    if 'imprimir' in request.POST:
+        return HttpResponseRedirect(reverse('detallecobro', args=(pk,)))
+
 
 
   else:
     cancelado = False
+    existe = False
     datos = CostosPorCliente.objects.filter(cliente=pk)
+    if datos:
+        existe = True
+
     contador_pago = 0
     contador = 0
     for d in datos:
@@ -366,4 +403,53 @@ def cobroCliente(request, pk):
     formset = CobrosClienteForm(queryset=CostosPorCliente.objects.filter(cliente=pk))
 
 
-  return render(request, 'clientes/cobro_cliente.html', {'formset': formset, 'cancelado': cancelado})
+  return render(request, 'clientes/cobro_cliente.html', {'formset': formset, 'existe': existe, 'cancelado': cancelado})
+
+
+def detalleCobro(request, pk):
+    cabezera = ServiciosCobroCliente.objects.filter(cliente=pk).last()
+    detalle = ServiciosCobroClienteDetalle.objects.filter(cobro=cabezera)
+
+    vd = []
+    total = 0
+    pago = 0
+    costo = 0
+    for d in detalle:
+        pago = pago + d.pago
+        costo = costo + d.costo
+        total = total + d.amortizacion
+        vd.append(d)
+
+    saldo = costo - pago
+
+    data = {
+        'cliente': cabezera.cliente,
+        'fecha': cabezera.fecha,
+        'num_recibo': cabezera.num_recibo,
+        'total': total,
+        'saldo': saldo,
+        'detalle': vd
+
+    }
+
+    return render_to_pdf('clientes/detallecobro.html', data)
+
+
+def reporteCobro(request, pk):
+    cobro = ServiciosCobroCliente.objects.filter(cliente=pk)
+    cabezera = []
+
+    for c in cobro:
+        detalle = ServiciosCobroClienteDetalle.objects.filter(cobro=c)
+        total = 0
+        for d in detalle:
+            total = total + d.amortizacion
+        cabezera.append({'num_recibo': c.num_recibo, 'fecha': c.fecha, 'total': total})
+
+    data = {
+        'cobro': cabezera,
+        'cliente': Cliente.objects.get(pk=pk)
+
+    }
+
+    return render(request, 'clientes/reporte_cobro.html', data)
