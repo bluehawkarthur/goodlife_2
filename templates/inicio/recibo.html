@@ -1,0 +1,260 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+  <style>
+   .center-text{
+    text-align:center;
+   }
+   .text-size{
+    font-size: 11px;
+
+   }
+   .bordes{
+    border:1px solid black;
+   }
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<section id="content"  >
+        <!--start container-->
+
+        <div class="borde">
+         
+           <table >
+
+                <tr style="border:none;">
+                  <td class="center-text text-size" >
+                  <img  src="{{logo}}" style="zoom: 30%;">
+                    
+                  </td>
+                  <td class="center-text">
+                    
+                  </td>
+                  <td class=" text-size">
+                  
+                    <table>
+                      <tr>
+                        <td><b>Fecha</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{fecha|date:'SHORT_DATE_FORMAT'}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>No Recibo</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{num_recibo}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Total Bs.</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{total}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Saldo</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{total}}</td>
+                      </tr>
+                    </table>
+                  </td>
+
+                </tr>
+
+                <tr style="border:none;">
+                  <td class="center-text text-size" >
+                 
+                  </td>
+                  <td class="center-text" width="250">
+                    <b style="font-size: 20px;">COMPROBANTE DE INGRESO</b> <br>
+                    <b>COPIA EMPRESA</b>
+                  </td>
+                  <td class="center-text text-size">
+                    
+                  </td>
+
+                </tr>
+
+              </table>
+              <table >
+                <tr style="border:none;">
+                  <td class="text-size" width="100">
+                  
+                  </td>
+                  <td class="text-size">
+                    <br>
+                  <b>Nombre cliente:</b> {{cliente.nombres|upper}} {{cliente.apellidos|upper}}<br>
+                  <b>Codigo Cliente GL:</b> {{cliente.codigo_gl}} <br>
+                  </td>
+                  <td class="text-size center-text">
+                  </td>
+                </tr>
+              </table>
+  
+              
+          <table style="padding: 4px;" class="text-size">
+          <thead>
+            <tr style="border:none;">
+              <th width="100"></th>
+              <th data-field="item" width="100">DETALLE PAGOS</th>
+              <th data-field="item"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%  for d in detalle %}
+    
+              <tr style="border:none; padding: 5px;">
+                <td width="100"></td>
+                <td style="border:1px solid black;text-align:left;" width="130"><b>{{d.examen}}</b></td>
+                <td style="border:1px solid black; text-align:right;" width="100">{{d.pago}}</td>
+              </tr>
+              
+            {% endfor %}
+
+
+            <tr style="border-botton:1px; border-right:none; border-left:none; padding: 30px;">
+              <td colspan="2"  style=" text-align:right; ">CLIENTE</td>
+              <td>
+              
+              </td>
+              <td>
+                GOODLIFE
+              </td>
+              <td ></td>
+              
+            </tr>
+          </tbody>
+          </table>
+           
+
+        
+           
+
+
+          </div>
+
+
+        <div class="borde">
+         
+           <table >
+
+                <tr style="border:none;">
+                  <td class="center-text text-size" >
+                  <img  src="{{logo}}" style="zoom: 30%;">
+                    
+                  </td>
+                  <td class="center-text">
+                    
+                  </td>
+                  <td class=" text-size">
+                  
+                    <table>
+                      <tr>
+                        <td><b>Fecha</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{fecha|date:'SHORT_DATE_FORMAT'}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>No Recibo</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{num_recibo}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Total Bs.</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{total}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Saldo</b></td>
+                        <td style="border:1px solid black;padding: 1px; text-align:right;">{{total}}</td>
+                      </tr>
+                    </table>
+                  </td>
+
+                </tr>
+
+                <tr style="border:none;">
+                  <td class="center-text text-size" >
+                 
+                  </td>
+                  <td class="center-text" width="250">
+                    <b style="font-size: 20px;">COMPROBANTE DE INGRESO</b> <br>
+                    <b>COPIA CLIENTE</b>
+                  </td>
+                  <td class="center-text text-size">
+                    
+                  </td>
+
+                </tr>
+
+              </table>
+              <table >
+                <tr style="border:none;">
+                  <td class="text-size" width="100">
+                  
+                  </td>
+                  <td class="text-size">
+                    <br>
+                  <b>Nombre cliente:</b> {{cliente.nombres|upper}} {{cliente.apellidos|upper}}<br>
+                  <b>Codigo Cliente GL:</b> {{cliente.codigo_gl}} <br>
+                  </td>
+                  <td class="text-size center-text">
+                  </td>
+                </tr>
+              </table>
+  
+              
+          <table style="padding: 4px;" class="text-size">
+          <thead>
+            <tr style="border:none;">
+              <th width="100"></th>
+              <th data-field="item" width="100">DETALLE PAGOS</th>
+              <th data-field="item"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%  for d in detalle %}
+    
+              <tr style="border:none; padding: 5px;">
+                <td width="100"></td>
+                <td style="border:1px solid black;text-align:left;" width="130"><b>{{d.examen}}</b></td>
+                <td style="border:1px solid black; text-align:right;" width="100">{{d.pago}}</td>
+              </tr>
+              
+            {% endfor %}
+
+
+            <tr style="border-botton:1px; border-right:none; border-left:none; padding: 27px;">
+              <td colspan="2"  style=" text-align:right; ">CLIENTE</td>
+              <td>
+              
+              </td>
+              <td>
+                GOODLIFE
+              </td>
+              <td ></td>
+              
+            </tr>
+          </tbody>
+          </table>
+           
+
+        
+           
+
+
+          </div>
+        
+
+        <!--end container-->
+</section>
+
+
+
+</body>
+</html>

@@ -11,5 +11,9 @@ urlpatterns = [
 
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^cobros/$', 'apps.inicio.views.cobros', name='cobros'),
+    url(r'^buscar_cliente/$', 'apps.inicio.views.searchCliente', name='buscar_cliente'),
+    url(r'^registrar_cobro/$', 'apps.inicio.views.addCobro', name='registrar_cobro'),
+    url(r'^detallecartera/(?P<pk>\d+)$', 'apps.inicio.views.detalleCartera', name='detallecartera'),
 
 ]

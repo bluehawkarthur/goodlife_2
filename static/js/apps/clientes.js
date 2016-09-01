@@ -196,6 +196,73 @@ $('#register').click(function(){
 // ================================= end modals ==================================================0
 
 
+// ======================================== MODALS TRAMITE =================================
+var validator_tramite = $('#formtramite').validate({
+    focusCleanup: true,
+    rules: {
+        tipo_tramite: {
+           
+            required: true
+        },
+        observaciones: {
+           
+            required: true
+        },
+    },
+    highlight: function(element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function(element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function(error, element) {
+        if(element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
+});
+
+
+// ==== para la el boton de cancelar del modal tramite 
+$(".cancel-tramite").click(function() {
+    validator_clinica.resetForm();
+    $("#formtramite").find(".has-error").removeClass("has-error");
+});
+    
+
+// ===== para guardar los datos del modal tramite en el servidor ======
+
+$('#register-tramite').click(function(){
+    console.log('am i called');
+    if ($("#formtramite").valid()) {
+        $.ajax({
+            type: "POST",
+            url: "/registrar_trami/",
+            dataType: "json",
+            data: $("#formtramite").serialize(),
+            success: function(data) {
+               console.log(data);
+               // para eliminar lo seleccionado en select tramite
+               $('#id_tramite option:selected').removeAttr("selected");
+
+               // para agregar la nueva tramite registrada en el select
+               $("#id_tramite").append("<option value=\""+data.pk+"\" selected='selected'>"+data.tipo_tramitetramite+"</option>");
+               
+               // para limpiar los imputs del modal
+               $('.modal-body').find('textarea,input').val('');
+
+               // para cerrar el modal
+               $('#Modaltramite').modal('hide');
+          }
+        }); 
+    } 
+
+    
+});
 // ======================================== MODALS CLINICA =================================
 
 // ======= para validar el modal de clinica ======

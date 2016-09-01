@@ -1,37 +1,101 @@
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
-	
-	<div class="container">
-		<div class="row">
-			<div class="panel panel-default">
-	<!-- Default panel contents -->
-	<div class="panel-heading"><h3 class='fixh3'>Lista de Empresas:</h3>
-		<a href="/registrar_empresa/"><button type="button" class="btn btn-success pull-right fixbutcrear">Crear Empresa</button>
-	</a>
-	</div>
-	<!-- Table -->
-		<table class="table">
-			<thead>
-				<th>Empresa</th>
-				<th>Detalle</th>
-				<th>Modificar</th>
-				<th>Eliminar</th>
-			</thead>
-			<tbody>
-			{% for object in object_list %}
-				<tr>
-					<td>{{object}}</td>
-					<td><a href="/detail_empresa/{{object.id}}">Ver</a></td>
-					<td><a href="/update_empresa/{{object.id}}">Editar</a></td>
-					<td><a href="/delete_empresa/{{object.id}}">Delete</a></td>
-				</tr>
-			{% endfor %}
-			</tbody>
-		</table>
-	</div>
+<section id="content">
+	<section class="vbox">
+		<header class="header bg-success bg-gradient">
+	        <ul class="nav nav-tabs">
+	            <li class="active"><a href="#static" data-toggle="tab">Empresa</a></li>
+	        </ul>
+	    </header>
+	    <section class="scrollable wrapper">
+			<div class="tab-content">
+				<div class="panel panel-default">
+			<!-- Default panel contents -->
+					<section class="panel">
+					    <header class="panel-heading"> Lista de Empresa de Good Life: </header>
+					    <div class="row text-sm wrapper">
+					        <div class="col-sm-5 m-b-xs">
+					            
+					            
+					            <a class="btn btn-sm btn-success" href="/registrar_empresa/">Crear Empresa</a>
 
-		</div>
-	</div>
+					        </div>
+					        <div class="col-sm-4 m-b-xs">
+					            
+					        </div>
+					        <div class="col-sm-3">
+					        	<form method="get">
+					            <div class="input-group">
+					                <input type="text" class="input-sm form-control" placeholder="buscar" name="q"> <span class="input-group-btn"> <button class="btn btn-sm btn-white" type="submit">Buscar</button> </span> </div>
+					            </form>
+					        </div>
+					    </div>
+					    <div class="table-responsive">
+					        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+						          <thead>
+						            <tr>
+						            	<th>Razon Social</th>
+						            	<th>Direccion</th>
+										<th>Telefono1</th>
+										<th>Nro Patronal</th>
+										<th>Departamento</th>
+										<th>Municipios</th>
+										<th>Detalle</th>
+										<th>Modificar</th>
+										<th>Eliminar</th>
+						            </tr>
+							        </thead>
+										<tbody>
+									{% for object in object_list %}
+										<tr>
+											<td>{{object.razon_social}}</td>
+											<td>{{object.direccion}}</td>
+											<td>{{object.telefono1}}</td>
+											<td>{{object.nro_patronal}}</td>
+											<td>{{object.departamento}}</td>
+											<td>{{object.municipios}}</td>
+											<td>
+												<a class="btn btn-default" href="/detail_empresa/{{object.id}}"><i class="icon-eye-open text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-warning" href="/update_empresa/{{object.id}}"><i class="icon-edit text"></i></a>
+											</td>
+											<td>
+												<a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modalDel{{object.id}}"><i class="fa fa-trash-o text"></i></a>
+												<!-- Modal -->
+												<div class="modal fade" id="modalDel{{object.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												  <div class="modal-dialog" role="document">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												        <h4 class="modal-title" id="myModalLabel">Eliminar cliente</h4>
+												      </div>
+												      <div class="modal-body">
+												        <p class="img-dashboard">Esta seguro que quiere eliminar "{{object.nombres}}"</p>
+												      </div>
+												      <div class="modal-footer">
+												        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+												   
+												        <a href="/delete_empresa/{{object.id}}" class="btn btn-primary">Eliminar</a>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+						        </table>
+					    </div>
+						{% include "_pagination.html" %}
+					    
+					</section>
+						
+			</div>
+		</section>
+	</section>
+</section>
 	
 {% endblock content %}	
+	

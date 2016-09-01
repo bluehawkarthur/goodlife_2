@@ -17099,3 +17099,8 @@ input[readonly] {
     border-color: #5cb85c; }
 .radio-success input[type="radio"]:checked + label::after {
     background-color: #5cb85c; }
+
+/*estilode texto de miniscula a mayuscala*/
+.label{
+  text-transform: uppercase;
+}

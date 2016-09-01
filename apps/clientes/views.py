@@ -1,11 +1,13 @@
 from django.shortcuts import render, render_to_response
+from django import forms
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, TemplateView
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from .models import Cliente, DtoCodigo, ServiciosCostos, CostosPorCliente, ServiciosCobroCliente, ServiciosCobroClienteDetalle
+from .models import Cliente, DtoCodigo, ServiciosCostos, CostosPorCliente, ServiciosCobroCliente, ServiciosCobroClienteDetalle, CarteraCliente
 from apps.empresas.models import Empresa
 from apps.clinicas.models import Clinica
+from apps.tramites.models import Tramite
 from .forms import ClienteForm, CostosForm, CostosPorClienteForm, CobrosClienteForm
 import json
 
@@ -109,8 +111,10 @@ def RegistrarCliente(request):
         ciudad_origen=form.cleaned_data['ciudad_origen'],
         nombres=form.cleaned_data['nombres'],
         apellidos=form.cleaned_data['apellidos'],
+        fecha_naciemiento=form.cleaned_data['fecha_naciemiento'],
         edad=form.cleaned_data['edad'],
         ci=form.cleaned_data['ci'],
+        expedido=form.cleaned_data['expedido'],
         telefono=form.cleaned_data['telefono'],
         cel=form.cleaned_data['cel'],
         foto=foto1,
@@ -127,6 +131,15 @@ def RegistrarCliente(request):
 
       codigod = DtoCodigo.objects.filter(id=dep.pk)
       codigod.update(cantidad=codigod[0].cantidad + 1)
+      cartera1 = CarteraCliente(cliente=cliente, examen='CONTRATO', deuda=0, pago=0, fecha=date.today())
+      cartera2 = CarteraCliente(cliente=cliente, examen='FISIOTERAPIA', deuda=0, pago=0, fecha=date.today())
+      cartera3 = CarteraCliente(cliente=cliente, examen='MEDICINA LABORAL', deuda=0, pago=0, fecha=date.today())
+      cartera4 = CarteraCliente(cliente=cliente, examen='PUESTO DE TRABAJO', deuda=0, pago=0, fecha=date.today())
+      cartera5 = CarteraCliente(cliente=cliente, examen='TRABAJO SOCIAL', deuda=0, pago=0, fecha=date.today())
+      cartera_list = [cartera1, cartera2, cartera3, cartera4, cartera5]
+
+      for cartera in cartera_list:
+        cartera.save()
 
       return HttpResponseRedirect(reverse('detallecliente', args=(cliente.pk,)))
 
@@ -153,10 +166,14 @@ class ClienteDetail(DetailView):
 class ClienteUpdate(UpdateView):
   template_name = 'clientes/update_cliente.html'
   model = Cliente
-  fields = ('codigo_gl', 'fecha_ingreso', 'ciudad_origen', 'nombres', 'apellidos', 'edad', 'ci', 'telefono', 'cel',
+  fields = ('codigo_gl', 'fecha_ingreso', 'ciudad_origen', 'nombres', 'apellidos', 'fecha_naciemiento', 'edad', 'ci', 'expedido', 'telefono', 'cel',
     'foto', 'activo', 'empresa', 'tramite', 'afps', 'clinica', 'persona_referencia', 'telefono_per_referencia',
-    'cel_per_referencia', 'fecha_inactivo')
-  success_url = reverse_lazy('listar_cliente')
+    'cel_per_referencia', 'seguro', 'fecha_inactivo')
+
+
+  def get_success_url(self):
+    print self.kwargs
+    return reverse('detallecliente', args=(self.kwargs['pk'],))
 
 
 def eliminarCliente(request, id):
@@ -165,8 +182,20 @@ def eliminarCliente(request, id):
   return HttpResponseRedirect(reverse_lazy('listar_cliente'))
 
 
-def addEmpresa(request):
+def addTramite(request):
+  if request.method == 'POST':
+    print 'llegoooo aaaaquiiii'
+    print request.POST['tipo_tramite']
+    tramite = Tramite(
+      tipo_tramite=request.POST['tipo_tramite'],
+      observaciones=request.POST['observaciones'])
+    tramite.save()
+    data = {'pk': tramite.pk, 'tipo_tramitetramite': tramite.tipo_tramite}
+    print 'guardoooooooo'
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
+
+def addEmpresa(request):
   if request.method == 'POST':
     print 'llegoooo aaaaquiiii'
     print request.POST['telefono1']
@@ -453,3 +482,7 @@ def reporteCobro(request, pk):
     }
 
     return render(request, 'clientes/reporte_cobro.html', data)
+
+
+def CrearDocument():
+  pass

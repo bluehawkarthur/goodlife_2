@@ -1,33 +1,46 @@
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
+{% load widget_tweaks %}
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#static" data-toggle="tab">TRAMITE AFP</a></li>
+      </ul>
+    </header>
+    <section class="scrollable wrapper">
+     <h1 class="text-center">Detalle de TRAMITE AFP Good Life</h1>
+      <div class="tab-content">
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
 
-<div class="container">
-  <div class="row">
-    <form class="form-horizontal">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-        <h1 class="">Detalle de tramite AFP:</h1>
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Tipo de Tramite:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.tipo_afp}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Observaciones:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.observaciones}}</p>
-            </div>
-          </div><!-- End form-group  -->
+         <form class="form-horizontal" method='POST'>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="" class="col-sm-5 control-label2">Razon Social:</label>
+              <div class="col-sm-10">
+              <p class="form-control">{{object.tipo_afp}}</p>
+              </div>
+              <label for="" class="col-sm-5 control-label2">Telefono1:</label>
+              <div class="col-sm-10">
+                <p class="form-control">{{object.observaciones}}</p>
+              </div>
+
+            </div><!-- End form-group  -->
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5 col-md-offset-3">
-          <a href="/listar_tramiteafp/" class="btn btn-lg btn-block btn-warning">Volver</a>
+        <div class="row">
+          <div class="col-md-5">
+            <a href="/listar_tramite/" class="btn btn-lg btn-block btn-warning">Volver</a>
+          </div>
         </div>
+
+        </form>
+        </section>  
       </div>
-
-      </form>
-  </div>
-</div>
-
-{% endblock content %}
+    </section>
+  </section>
+</section>
+{% endblock content %}  

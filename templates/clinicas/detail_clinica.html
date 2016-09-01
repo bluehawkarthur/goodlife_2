@@ -1,40 +1,64 @@
-
-{% extends 'base.html' %}
+{% extends 'base_sistema.html' %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <form class="form-horizontal">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-        <h1 class="">Detalle de Clinica/Hospital</h1>
-          <div class="form-group">
-            <label for="" class="col-sm-5 control-label2">Razon social:</label>
-            <div class="col-sm-10">
-            <p class="form-control">{{object.razon_social}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Direccion:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.direccion}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono 1:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.telefono1}}</p>
-            </div>
-            <label for="" class="col-sm-5 control-label2">Telefono 2:</label>
-            <div class="col-sm-10">
-              <p class="form-control">{{object.telefono2}}</p>
-            </div>
-          </div><!-- End form-group  -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5 col-md-offset-3">
-          <a href="/listar_clinica/" class="btn btn-lg btn-block btn-warning">Volver</a>
-        </div>
-      </div>
+{% load widget_tweaks %}
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#static" data-toggle="tab">Clinica</a></li>
+      </ul>
+    </header>
+    <section class="scrollable wrapper">
+     <h1 class="text-center">Detalle de Clinica Good Life</h1>
+      <div class="tab-content">
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
 
-      </form>
-  </div>
-</div>
-{% endblock content %}
+         <form class="form-horizontal" method='POST'>
+          <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="" class="col-sm-5 control-label2">Razon Social:</label>
+              <div class="col-sm-10">
+              <p class="form-control">{{object.razon_social}}</p>
+              </div>
+
+              
+
+              <label for="" class="col-sm-5 control-label2">Telefono1:</label>
+              <div class="col-sm-10">
+                <p class="form-control">{{object.telefono1}}</p>
+              </div>
+
+            </div><!-- End form-group  -->
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="" class="col-sm-5 control-label2">Direccion:</label>
+              <div class="col-sm-10">
+                <p class="form-control">{{object.direccion}}</p>
+              </div>
+
+              <label for="" class="col-sm-5 control-label2">Telefono2:</label>
+              <div class="col-sm-10">
+                <p class="form-control">{{object.telefono2}}</p>
+              </div>
+              
+            </div><!-- End form-group  -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <a href="/listar_clinica/" class="btn btn-lg btn-block btn-warning">Volver</a>
+          </div>
+        </div>
+
+        </form>
+        </section>  
+      </div>
+    </section>
+  </section>
+</section>
+{% endblock content %}  

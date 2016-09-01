@@ -3,6 +3,7 @@
 
 {% block content %}
 {% load widget_tweaks %}
+
 <section id="content">
   <section class="vbox">
     <header class="header bg-success bg-gradient">
@@ -29,7 +30,7 @@
                                 <input type="text" class="form-control" id="id_fecha_ingreso3" name="fecha_ingreso3"/>
                             </div>
                             <div class="form-group">
-                              <label class="control-label">{{ form.codigo_gl.label }}</label>
+                              <label class="control-label">{{ form.codigo_gl.label}}</label>
                                 <input type="text" class="form-control" id="id_codigo_gl" value='{{codigo_dep}}' name="codigo_gl"/>
                             </div>
                           </div>
@@ -111,23 +112,45 @@
                               </div>
                             </div>
                         </div>
-
+                        
                         <div class="row">
                           <div class="col-md-6">
+                              <div class="form-group {% if form.errors.fecha_naciemiento %} has-error {% endif %}">
+                                  <label class="control-label">{{ form.fecha_naciemiento.label }}</label>
+                                  <input type="date" name="fecha" class="form-control" id="id_fecha_naciemiento">
+                                  <div class="help-block with-errors">
+                                    {{form.errors.fecha_naciemiento|removetags:'ul li'}}
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
                               <div class="form-group {% if form.errors.edad %} has-error {% endif %}">
                                 <label class="control-label">{{ form.edad.label }}</label>
-                                <input type="number" class="form-control" id="id_edad" name="edad" />
+                                <input type="text" class="form-control" id="id_edad" name="edad" />
                                 <div class="help-block with-errors">
                                   {{form.errors.edad|removetags:'ul li'}}
                                 </div>
                               </div>
                             </div>
+                            
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                               <div class="form-group {% if form.errors.ci %} has-error {% endif %}">
                                 <label class="control-label">{{ form.ci.label }}</label>
                                 <input type="number" class="form-control" id="id_ci" name="ci" />
                                 <div class="help-block with-errors">
                                   {{form.errors.ci|removetags:'ul li'}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group {% if form.errors.expedido %} has-error {% endif %}">
+                                <label class="control-label">{{ form.expedido.label }}</label>
+                                <input type="text" class="form-control" id="id_expedido" name="expedido" />
+                                <div class="help-block with-errors">
+                                  {{form.errors.expedido|removetags:'ul li'}}
                                 </div>
                               </div>
                             </div>
@@ -168,13 +191,21 @@
                                 <div class="help-block with-errors">{{form.errors.empresa|removetags:'ul li'}}</div>
                               </div>
                             </div>
+
                             <div class="col-md-6">
                               <div class="form-group {% if form.errors.tramite %} has-error {% endif %}">
                                 <label class="control-label">{{ form.tramite.label }}</label>
-                                {{ form.tramite|add_class:"form-control" }}
-                                <div class="help-block with-errors">
-                                  {{form.errors.tramite|removetags:'ul li'}}
-                                </div>
+
+                                <div class="input-group">
+                                  {{ form.tramite|add_class:"form-control" }}
+                                  <span class="input-group-btn">
+                                    
+                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#Modaltramite" data-backdrop="static">+</button>
+                                  </span>
+
+                                </div><!-- /input-group -->
+                                <div class="help-block with-errors">{{form.errors.tramite|removetags:'ul li'}}</div>
+
                               </div>
                             </div>
                         </div>
@@ -342,7 +373,45 @@
                 </div>
               </div>
             </div>
+            
+<!-- qqqqqqqqqqqqqqqqqqqqqqqqq-->
+              <!-- Modal tramite -->
+            <div class="modal fade" id="Modaltramite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close cancel-tramite" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registro de tramite</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formtramite" method="POST">
+                     
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">tipo_tramite:</label>
+                                <input class="form-control" type='text' name='tipo_tramite'>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Observaciones:</label>
+                                <input type="text" class="form-control" id="" name='observaciones'>
+                            </div>
+                          </div>
 
+                      </div>    
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default cancel-tramite" id="cancel" data-dismiss="modal">Cerrar</button>
+                    <button id="register-tramite" type="button" class="btn btn-primary">Guardar</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!-- qqqqqqqqqqqqqqqqqqqqqqqqq-->
 
             <!-- Modal Foto-->
             <div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -552,5 +621,35 @@
         });
       }
 
+      $('#id_fecha_naciemiento').on('change',function(){
+      // var dia = prompt("Día de nacimiento:");
+      // var mes = prompt("Mes de nacimiento:");
+      // var ano = prompt("Año de nacimiento:");
+      var aa = $('#id_fecha_naciemiento').val();
+      console.log(aa);
+      var arr = aa.split('-');
+      var ano = arr[0];
+      var mes = arr[1];
+      var dia = arr[2];
+
+      fecha_hoy = new Date();
+      ahora_ano = fecha_hoy.getYear();
+      ahora_mes = fecha_hoy.getMonth();
+      ahora_dia = fecha_hoy.getDate();
+      edad = (ahora_ano + 1900) - ano;
+          
+          if ( ahora_mes < (mes - 1)){
+            edad--;
+          }
+          if (((mes - 1) == ahora_mes) && (ahora_dia < dia)){ 
+            edad--;
+          }
+          if (edad > 1900){
+              edad -= 1900;
+          }
+       
+          //alert("¡Tienes " + edad + " años!");
+          $('#id_edad').val(edad);
+      });
     </script>
   {% endblock js %}

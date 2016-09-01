@@ -21,8 +21,10 @@ class Cliente(models.Model):
 	ciudad_origen = models.CharField(max_length=50, choices=DEP_CHOICES)
 	nombres = models.CharField(max_length=100)
 	apellidos = models.CharField(max_length=100)
+	fecha_naciemiento = models.DateField(null=True, blank=True)
 	edad = models.IntegerField()
 	ci = models.BigIntegerField()
+	expedido = models.CharField(max_length=100, null=True, blank=True)
 	telefono = models.IntegerField(null=True, blank=True)
 	cel = models.IntegerField(null=True, blank=True)
 	foto = models.ImageField(upload_to='clientes', null=True, blank=True)
@@ -89,3 +91,55 @@ class ServiciosCobroClienteDetalle(models.Model): # Detalle de Cobros
 
 	def __unicode__(self):
 		return "%s - %s - %s - %s" % (self.cobro, self.servicio, self.costo, self.pago)
+
+
+class CarteraCliente(models.Model): # Cabecera de Cobros
+	cliente = models.ForeignKey(Cliente, null=True, blank=True)
+	examen = models.CharField(max_length=100)
+	deuda = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	pago = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	fecha = models.DateField()
+	num_recibo = models.IntegerField(null=True, blank=True)
+	
+	def __unicode__(self):
+		return "%s - %s" % (self.cliente.codigo_gl, self.fecha)
+
+
+class CarteraCabezera(models.Model): # Cabecera de Cobros
+	cliente = models.ForeignKey(Cliente, null=True, blank=True)
+	fecha = models.DateField()
+	num_recibo = models.IntegerField(null=True, blank=True)
+	total = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	saldo = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	
+	def __unicode__(self):
+		return "%s - %s" % (self.cliente.codigo_gl, self.fecha)
+
+
+class CarteraDetalle(models.Model):
+	cartera_c = models.ForeignKey(CarteraCabezera, null=True, blank=True)
+	examen = models.CharField(max_length=100)
+	deuda = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	pago = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+
+class Documento(models.Model):
+	poder = models.BooleanField()
+	decl_enf_den_accid = models.BooleanField()
+	avc_carnet_aseg = models.BooleanField()
+	croquis_domicilio = models.BooleanField()
+	cert_nacimiento_aseg = models.BooleanField()
+	cert_trabajo = models.BooleanField()
+	ci_asegurado = models.BooleanField()
+	boleta_trabajo = models.BooleanField()
+	cert_matrimonio = models.BooleanField()
+	extracto_afp = models.BooleanField()
+	cert_d_nacimiento_cony = models.BooleanField()
+	actalizacion = models.BooleanField()
+	ci_conyugue = models.BooleanField()
+	contrato = models.BooleanField()
+	cert_nac_hijos = models.BooleanField()
+	costo_bs_item_contrato = models.BooleanField()
+	ci_hijos = models.BooleanField()
+	resolucion_invalidz_hijos = models.BooleanField()
+	cliente = models.ForeignKey(Cliente, null=True, blank=True)

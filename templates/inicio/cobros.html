@@ -1,0 +1,332 @@
+{% extends 'base_sistema.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+<style media="screen">
+  .flecha{
+    position: fixed;
+    margin: -30px 200px;
+  }
+  .texto-form{
+    text-align: center;
+  }
+  .borde-div{
+        border: 1px solid #d8dde5;
+  }
+  .botones-compra{
+    margin-top: 20px;
+  }
+</style>
+<section id="content">
+  <section class="vbox">
+    <header class="header bg-success bg-gradient">
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#static" data-toggle="tab">Clientes</a></li>
+          </ul>
+      </header>
+      <section class="scrollable wrapper">
+      <div class="tab-content">
+        <div class="panel panel-default">
+      <!-- Default panel contents -->
+          <section class="panel">
+              <header class="panel-heading"> RECEPCION DE PAGO</header>
+              <br>
+              <form class="form-horizontal"  method="POST" id="formcobro" >
+
+                  <!-- <div class="col-sm-3">
+                  <div class="form-group">
+                    <label class="control-label">Fecha</label>
+                    <input type="text" name="fecha" id="date-picker" class="form-control">
+                  </div>
+                  </div> -->
+
+                  <div class="form-group"> 
+                    <label class="col-sm-2 control-label">CODIGO GL</label> 
+                    <div class="col-sm-3"> 
+                      <input type="text" name="codigogl" id="codigogl" class="bg-focus form-control parsley-validated" data-required="true" data-type="email">
+                      <input type="hidden" name="pk_cliente" id="pk_cliente" class="bg-focus form-control parsley-validated" data-required="true" data-type="email"> 
+                    </div>
+                    <a class="btn  btn-success" id="buscar">BUSCAR</a>
+                   
+
+                    <button class="btn  btn-primary" id="2" name="imprimir" data-toggle="modal" data-target="#Modalcliente">ENCONTRAR CODIGO CLIENTE
+                      <i class="mdi-content-save right"></i>
+                    </button>
+                  
+                  </div>
+                  <div class="form-group"> 
+                    <label class="col-sm-2 control-label">NOMBRE CLIENTE</label> 
+                    <div class="col-sm-7"> 
+                      <input type="text" name="nombres" id="nombres" class="bg-focus form-control parsley-validated" data-required="true" data-type="email"> 
+                    </div>
+                    
+                  </div>
+
+
+              <div class="table-responsive">
+
+                 
+                  <div class="col-sm-6 borde-div">
+                    <h4 class="texto-form">RECEPCION DE PAGO</h4>
+
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">INFORME FINAL</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="informe_final" id="informe_final" class="bg-focus form-control parsley-validated calculo_totales_down" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">FISIOTERAPIA</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="fisoterapia" id="fisoterapia" class="bg-focus form-control parsley-validated calculo_totales_down" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">MEDICINA LABORAL</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="medicina_laboral" id="medicina_laboral" class="bg-focus form-control parsley-validated calculo_totales_down" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">PUESTO DE TRABAJO</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="puesto_trabajo" id="puesto_trabajo" class="bg-focus form-control parsley-validated calculo_totales_down" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">TRABAJO SOCIAL</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="trabajo_social" id="trabajo_social" class="bg-focus form-control parsley-validated calculo_totales_down" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                    <div class="form-group"> 
+                      <label class="col-sm-4 control-label">TOTALES</label> 
+                      <div class="col-sm-5"> 
+                        <input type="text" name="totales" id="totales" class="bg-focus form-control parsley-validated" data-required="true" data-type="email"> 
+                      </div>
+                      
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 borde-div">
+                    <h4 class="texto-form">DETALLE CARTERA CLIENTE ANTES DE PAGO</h4>
+                    <table class="table table-bordered" id="tb-cartera">
+                      <thead>
+                        <tr>
+                          <th>Detalle TEMS</th>
+                          <th>DEUDA</th>
+                          <th>PAGO</th>
+                          <th>SALDO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+              
+
+    
+                  <!-- <div class="row text-sm wrapper">
+                    <div class="col-sm-7 m-b-xs">
+
+                      <button class="btn  btn-primary refresh" id="save" name="guardar">Guardar
+                      <i class="mdi-content-save right"></i>
+                      </button>
+                      <button class="btn  btn-success" id="save" name="imprimir">Imprimir
+                      <i class="mdi-content-save right"></i>
+                      </button>
+                    </div>
+                      
+                  </div>
+ -->
+                 
+
+              </div>
+               <div class="form-group text-sm wrapper">
+                    <div class="col-sm-7 m-b-xs botones-compra">
+                     <button class="btn  btn-primary" id="register-cobro" name="guardar" type="button">REALIZAR PAGO
+                      <i class="mdi-content-save right"></i>
+                      </button>
+                      <!-- <button class="btn  btn-success" id="save" name="imprimir">Imprimir
+                      <i class="mdi-content-save right"></i>
+                      </button> -->
+                    </div>
+                  </div>
+              </form>
+
+
+          </section>
+
+      </div>
+    </div>
+    </section>
+  </section>
+</section>
+
+ <!-- Modal cliente -->
+            <div class="modal fade" id="Modalcliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close cancel-clinica" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA CLIENTE</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formclinica" class="form-horizontal"  method="POST">
+                      <div class="form-group"> 
+                        <label class="col-sm-4 control-label">NOMBRE CLIENTE:</label> 
+                        <div class="col-sm-5"> 
+                          <input class="form-control" id="nombre_cliente" type='text' name='nombre_cliente'>
+                        </div>  
+                      </div>
+                      <div class="form-group"> 
+                        <label class="col-sm-4 control-label">CI. ASEGURADO:</label> 
+                        <div class="col-sm-5"> 
+                          <input class="form-control" type='text' id="ci_cliente" name='ci_cliente'>
+                        </div>
+                        <a class="btn  btn-success" id="buscarcli">BUSCAR</a>  
+                      </div>
+                      <fieldset style="border: 1px solid #aeb6cb;">
+                        <legend style="border-bottom: none;width: auto;">Los datos encontrados son:</legend>
+                        <div class="form-group"> 
+                          <label class="col-sm-4 control-label"> CODIGO GL:</label>
+                          <div class="col-sm-5"> 
+                            <input class="form-control" type='text' id="codigo_gl1" name='codigo_gl1'>
+                          </div>
+                        </div>
+                        <div class="form-group"> 
+                          <label class="col-sm-4 control-label"> NOMBRE CLIENTE:</label>
+                          <div class="col-sm-5"> 
+                            <input class="form-control" type='text' name='nombre_cli1' id="nombre_cli1">
+                          </div>
+                        </div>
+                        <div class="form-group"> 
+                          <label class="col-sm-4 control-label"> CI. ASEGURADO:</label>
+                          <div class="col-sm-5"> 
+                            <input class="form-control" id="ci_cliente1" type='text' name='ci_cliente1'>
+                          </div>
+                        </div>
+                      </fieldset>
+     
+              
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default cancel-clinica" id="cancel" data-dismiss="modal">Cerrar</button>
+                    <button id="aceptar_busqueda" type="button" class="btn btn-primary">Aceptar</button>
+                    </form>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock content %}
+{% block js %}
+{% load staticfiles %}
+<script src="{% static "js/apps/cobros.js"%}"></script>
+<script>
+
+// ---------- refresh page this save monto ---------
+ function autoRefresh1()
+  {
+       window.location.reload();
+  }
+
+ $( ".refresh" ).click(function() {
+       setInterval('autoRefresh1()', 1000);
+  });
+
+// var total = 0;
+function calTotal(){
+
+    var total_importe=0;
+    var total_pago=0;
+    var total_cobro=0;
+
+    var total_form = $('#id_form-TOTAL_FORMS').val();
+    console.log(total_form);
+
+    for (i = 0; i < total_form; i++) {
+
+      var stimporte = $('#id_form-'+i+'-costo').val();
+      var stpago = $('#id_form-'+i+'-pago').val();
+      var stmonto = $('#id_form-'+i+'-monto').val();
+
+
+      total_importe = total_importe + stimporte*1;
+      total_pago = total_pago + stpago*1
+      total_cobro = total_cobro + stmonto*1
+
+    }
+
+    console.log(total_importe);
+
+
+    var t=0;
+    // $('#tabla tbody tr').each(function () {
+    //     total = total*1 + $(this).find("td").eq(1).html()*1;
+    //     console.log($(this).find("td input").eq(1).html());
+
+
+    //     if (!isNaN(total)) {
+    //       t = t*1 + $(this).find("td").eq(1).html()*1;
+
+    //     };
+    // });
+
+    $('#sum-total-importe').text(total_importe);
+
+    $('#sum-total-pago').text(total_pago);
+
+    $('#sum-total-monto').text(total_cobro);
+
+
+}
+
+calTotal();
+
+var total_form = $('#id_form-TOTAL_FORMS').val();
+var total_cobro=0;
+for (i = 0; i < total_form; i++) {
+      var stimporte = $('#id_form-'+i+'-costo').val();
+      var stpago = $('#id_form-'+i+'-pago').val();
+      $('#id_form-'+i+'-monto').val(stimporte-stpago);
+
+      var stmonto = $('#id_form-'+i+'-monto').val();
+      total_cobro = total_cobro + stmonto*1
+      if (stimporte-stpago == 0) {
+        console.log('entro aquiii');
+        $('.monto-'+i).html('<i class="icon-ok icon-2x text-success flecha"></i>');
+      }
+}
+
+$('#sum-total-monto').text(total_cobro);
+
+$(".calculo_totales_down").keyup(function(){
+  calTotal();
+});
+
+$( "#date-picker" ).dateDropper({
+  'lang': 'es',
+  'format': 'd-m-Y',
+  'dropPrimaryColor': '#92cf5c',
+  'dropBorder': '1px solid #92cf5c',
+  'animate': false
+});
+
+// ====== para mostrar fecha de ingreso en el input ====
+var now = new Date();
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = (day)+"-"+(month)+"-"+now.getFullYear() ;
+
+$('#date-picker').val(today);
+
+</script>
+{% endblock %}
