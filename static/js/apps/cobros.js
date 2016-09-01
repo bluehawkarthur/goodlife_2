@@ -207,7 +207,7 @@ $('#register-cobro').click(function(){
             data: $("#formcobro").serialize(),
             success: function(data) {
                // console.log(data);
-               window.open("http://localhost:8000/detallecartera/"+data.pk, "_blank");
+               window.open("http://sisgoodlife.herokuapp.com/detallecartera/"+data.pk, "_blank");
                // para eliminar lo seleccionado en select clinica
           }
         }); 
